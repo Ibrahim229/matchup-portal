@@ -146,7 +146,7 @@ export class XhrService {
               // The response body may contain clues as to what went wrong,
               if (error.status === 400) {
                 this.toastrService.showToastr(
-                  error.error ? error.error : 'An error occurred',
+                  error.error?.message ? error.error.message : error.error,
                   ToastrTypes.error
                 );
               } else if (error.status === 401) {
@@ -158,7 +158,10 @@ export class XhrService {
                 localStorage.clear();
                 this.navigationService.navigate(['/login']);
               } else {
-                this.toastrService.showToastr(error?.error, ToastrTypes.error);
+                this.toastrService.showToastr(
+                  error?.error.message ? error?.error.message : error.error,
+                  ToastrTypes.error
+                );
               }
             }
             observer.error(rejection);

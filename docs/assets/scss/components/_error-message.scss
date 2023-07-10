@@ -1,0 +1,19 @@
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+
+  i {
+    width: 17px;
+    height: 17px;
+    background: rgba(237, 28, 36, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  }
+
+  p {
+    margin: 0;
+  }
+}

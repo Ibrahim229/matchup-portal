@@ -1,0 +1,28 @@
+body {
+  .mat-snack-bar-container {
+    font-size: 1.1em;
+    max-width: 40vw;
+    min-width: 175px;
+    color: $white;
+
+    &.error {
+      background-color: $red-900;
+
+    }
+
+    &.succes {
+      background-color: $green-700;
+
+    }
+
+    .snckbar-container {
+      @include flex($direction: row);
+      gap: .5rem;
+
+      p {
+        margin: 0;
+      }
+    }
+  }
+
+}

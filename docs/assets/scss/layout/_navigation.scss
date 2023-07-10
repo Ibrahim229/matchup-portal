@@ -1,0 +1,164 @@
+.main-layout {
+  .main-navbar {
+    background-color: $white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    height: 85px;
+
+    .navbar-container {
+      .navbar-right {
+        .navbar-logo {
+          width: 230px;
+
+          a {
+            width: 100%;
+            display: inline-block;
+
+            img {
+              width: 90%;
+            }
+          }
+        }
+      }
+
+      .navbar-left {
+        .notifications-container {
+          height: 100%;
+          display: inline-block;
+
+          .mat-icon-button {
+            width: auto;
+            height: auto;
+
+            .mat-button-wrapper {
+              width: 100%;
+              height: 100%;
+              display: inline-block;
+
+              .icon-notification {
+                font-size: 2.2em;
+                width: 45px;
+                background-color: $grey;
+                height: 45px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+              }
+            }
+          }
+        }
+        .account-dropdown-container{
+          .mat-button-wrapper{
+            p{
+              font-weight: 700;
+            }
+          }
+        }
+      }
+
+    }
+
+  }
+}
+
+
+
+
+// dropdown-account
+.account-menu {
+  &.mat-menu-panel {
+    width: 190px;
+
+    .mat-menu-content {
+      padding-left: 8px;
+      padding-right: 8px;
+
+      .mat-menu-item {
+        padding: 0 8px;
+
+        &:not(:last-child) {
+          border-bottom: 1px solid $black-100;
+        }
+
+        &:last-child {
+          color: $red-900;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+
+// notification menu
+.notification-menu {
+  width: 270px;
+
+  .mat-menu-content {
+    &:not(:empty) {
+      padding-bottom: 0;
+    }
+
+    .mat-menu-item {
+      height: auto;
+      padding: 0;
+
+      .notification-item {
+        padding: 0 10px;
+
+        .notification-item-header {
+          mat-icon {
+            min-width: 24px;
+            opacity: 0;
+            visibility: hidden;
+            display: none;
+          }
+
+          .notification-item-date {
+            color: $black-300;
+          }
+        }
+
+        .notification-item-body {
+          mat-icon {
+            min-width: 24px;
+            opacity: 0;
+            visibility: hidden;
+            display: none;
+          }
+
+          p {
+            color: $black-300;
+            white-space: pre-line;
+            line-height: 1.5;
+            text-align: left;
+          }
+        }
+
+        &.notification-item-new {
+          background: $orange-100;
+          color: $black;
+
+          .notification-item-header {
+            mat-icon {
+              color: $orange-900;
+              opacity: 1;
+              visibility: visible;
+              display: block;
+            }
+          }
+
+          .notification-item-body {
+            color: $black;
+
+            mat-icon {
+              display: block;
+            }
+          }
+        }
+      }
+
+    }
+  }
+
+}

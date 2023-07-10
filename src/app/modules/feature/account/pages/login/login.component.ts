@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       if (res.userData.role === RoleType.Super_Admin) {
         this.navigationService.navigate(['/account']);
       } else {
-        this.navigationService.navigate(['/account/change-password']);
+        this.navigationService.navigate(['/pitches']);
       }
     });
   }

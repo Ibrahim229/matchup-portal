@@ -33,6 +33,9 @@
                             </button>
                             <mat-menu #menu="matMenu" RtlDir>
                                 <button mat-menu-item RtlDir
+                                    [routerLink]="['/pitches/scheduler', row?._id]">{{'PITCH.VIEW_SCHEDULER' |
+                                    translate}}</button>
+                                <button mat-menu-item RtlDir
                                     [routerLink]="['details', row?._id]">{{'LABELS.VIEW_DETAILS' |
                                     translate}}</button>
                                 <button mat-menu-item RtlDir [routerLink]="['/pitches/edit-pitch', row?._id]"

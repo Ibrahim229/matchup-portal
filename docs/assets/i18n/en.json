@@ -106,7 +106,8 @@
     "PITCH_SETTING_TYPE": "Pitch Setting Type",
     "PLAYERS_NUMBER": "Players Number",
     "ADD_PITCH_IMAGES": "Add Pitch Images",
-    "DELETE_PITCH":"Delete Pitch",
-    "PITCH_LOCATION":"Pitch Location"
+    "DELETE_PITCH": "Delete Pitch",
+    "PITCH_LOCATION": "Pitch Location",
+    "VIEW_SCHEDULER": "View Scheduler"
   }
 }

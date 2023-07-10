@@ -108,6 +108,7 @@
     "PLAYERS_NUMBER": "عدد اللاعبين",
     "ADD_PITCH_IMAGES": "اضافة صور الملعب ",
     "DELETE_PITCH": "حذف ملعب",
-    "PITCH_LOCATION": "مكان الملعب"
+    "PITCH_LOCATION": "مكان الملعب",
+    "VIEW_SCHEDULER": "عرض المواعيد"
   }
 }

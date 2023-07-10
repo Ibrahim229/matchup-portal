@@ -16,7 +16,6 @@
                 <ng-template #tableHead>
                     <tr>
                         <th>{{'LABELS.FORM.USER_NAME' | translate}}</th>
-                        <!-- <th>{{'LABELS.FORM.EMAIL' | translate}}</th> -->
                         <th>{{'LABELS.FORM.Role' | translate}}</th>
                         <th *ngIf="isHasRole(RoleType.Super_Admin)">{{'ACTIONS.ACTIONS' | translate}}</th>
                     </tr>
@@ -26,9 +25,6 @@
                         <td>
                             {{row?.fullName}}
                         </td>
-                        <!-- <td>
-                            {{row?.email}}
-                        </td> -->
                         <td>
                             {{row?.role ? row?.role : '-'}}
                         </td>
@@ -49,6 +45,3 @@
         </section>
     </div>
 </div>
-
-<!-- <mwl-calendar-day-view [viewDate]="viewDate" [events]="events">
-</mwl-calendar-day-view> -->

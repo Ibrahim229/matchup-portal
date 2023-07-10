@@ -187,7 +187,7 @@ export class AddEditPitchComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   handleNext() {
-    this.selectedIndex < 5 && this.selectedIndex++;
+    this.selectedIndex < 3 && this.selectedIndex++;
   }
 
   handleBack() {

@@ -9,13 +9,21 @@ import { AddEditPitchComponent } from './pages/add-edit-pitch/add-edit-pitch.com
 import { HttpClientModule } from '@angular/common/http';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { PitchDetailsComponent } from './pages/pitch-details/pitch-details.component';
+import { PitchSchedulerComponent } from './pages/pitch-scheduler/pitch-scheduler.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
 
 @NgModule({
-  declarations: [PitchListingComponent, AddEditPitchComponent,PitchDetailsComponent],
+  declarations: [
+    PitchListingComponent,
+    AddEditPitchComponent,
+    PitchDetailsComponent,
+    PitchSchedulerComponent,
+  ],
   imports: [
     CommonModule,
     TranslateModule,
     SharedModule,
+    FullCalendarModule,
     PitchRoutingModule,
     GoogleMapsModule,
     HttpClientModule,

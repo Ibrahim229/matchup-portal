@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IDataTable } from 'src/app/modules/shared/_models/data-table.model';
 import { Observable, debounceTime, of } from 'rxjs';
-import { PageEvent } from '@angular/material/paginator';
-import { Router } from '@angular/router';
 import { ConfirmationDialog } from 'src/app/modules/shared/_models/dialog-confirmation.model';
 import { ConfirmDialogComponent } from 'src/app/modules/shared/components/confirm-dialog/confirm-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -11,11 +9,7 @@ import { Subscriptions } from 'src/app/modules/shared/utils/subscriptions';
 import { RoleType } from 'src/app/modules/core/enums/role.enum';
 import { isHasRole } from 'src/app/modules/shared/utils/isHasRole';
 import { AccountService } from '../../services/account/account.service';
-import { FormControl } from '@angular/forms';
 import { InputTypes } from 'src/app/modules/shared/enums/form-input-types.enum';
-import { CalendarEvent, CalendarView } from 'angular-calendar';
-import { setHours, setMinutes } from 'date-fns';
-import { EventColor } from 'calendar-utils';
 import { RegisterUserModalComponent } from '../../components/register-user-modal/register-user-modal.component';
 
 @Component({
@@ -85,7 +79,13 @@ export class UsersListingComponent implements OnInit {
       minWidth: '500px',
       disableClose: true,
     });
-    return dialogRef.afterClosed();
+    return dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.getAdminUsers();
+      } else {
+        return res;
+      }
+    });
   }
 
   isHasRole(role: RoleType) {

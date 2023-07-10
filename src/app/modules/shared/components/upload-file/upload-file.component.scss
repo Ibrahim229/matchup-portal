@@ -1,0 +1,136 @@
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
+.upload-file-wrapper {
+  .multiple-preview {
+    width: 100%;
+  }
+  .overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 130px;
+    background-color: $grey-100;
+    border: 1px dashed #dadada;
+    border-radius: 6px;
+    cursor: pointer;
+    gap: 10px;
+    h2 {
+      font-size: 16px;
+    }
+    @include bp-max-width($bp-max-mobile) {
+      flex-direction: column;
+      h2 {
+        font-size: 12px;
+        text-align: center;
+        margin-top: 10px;
+      }
+    }
+  }
+  @include bp-max-width($bp-tablet-max) {
+    flex-direction: column;
+    align-items: baseline;
+  }
+  &.is-image-preview {
+    justify-content: unset;
+    .image-preview {
+      margin: 0 20px;
+    }
+  }
+  .image-preview-wrapper {
+    display: flex;
+    align-items: end;
+    .image-preview {
+      position: relative;
+      width: 154px;
+      div {
+        background: #ffffff;
+        box-shadow: 0px 0px 10px rgb(74 80 102 / 14%);
+        border-radius: 6px;
+        position: absolute;
+        bottom: 10px;
+        right: -14px;
+        width: 28px;
+        height: 28px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+    span {
+      display: inline-block;
+      margin: 0 20px;
+      font-weight: 500;
+      color: $grey-500;
+      cursor: pointer;
+      width: 150px;
+      word-break: break-all;
+      margin-top: 10px;
+    }
+  }
+  @include bp-max-width($bp-lg-mobile-max-tablet-min) {
+    & {
+      flex-direction: column;
+      align-items: baseline;
+      // label {
+      //   margin-bottom: 5px;
+      // }
+      .overlay {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.validation-meassages {
+  color: $red;
+}
+
+.multiple-files-wrapper {
+  background-color: $grey-250;
+  padding: 2px 15px;
+  display: flex;
+  align-items: flex-end;
+  margin: 2px 0px;
+  min-height: 130px;
+  flex-wrap: wrap;
+  .single-file-wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin: 5px 10px;
+    .file-preview {
+      display: flex;
+      align-items: flex-end;
+      max-width: 140px;
+      div {
+        display: flex;
+        flex-direction: column;
+        align-items: baseline;
+        img {
+          width: 62px;
+          height: 62px;
+        }
+        .file-name {
+          font-size: 12px;
+          font-weight: bold;
+          white-space: nowrap;
+          width: 72px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: inline-block;
+          margin-top: 10px;
+        }
+      }
+      .remove-file {
+        display: inline-block;
+        color: $grey-500;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0 5px;
+        cursor: pointer;
+        text-transform: capitalize;
+      }
+    }
+  }
+}

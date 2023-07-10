@@ -1,0 +1,60 @@
+// colors
+
+// grey
+$grey-100: #f3f5f8;
+$grey-200: #d1d1d1;
+$grey-250: #f9f9f9;
+$grey-300: #e5e5e5;
+$grey-350: #e8e8ea;
+$grey-400: #8c8d98;
+$grey-500: #5d5f6f;
+$grey: #eeeeee;
+
+//blue
+$blue-100: #181c32;
+$blue-200: #0b254b;
+$blue-200: #dae7e8;
+$blue-500: #4e57a1;
+
+// green
+$green-700: #00cc67;
+$green-900: #079247;
+
+//black
+$black-100: #3333331a;
+$black-300: #000000b3;
+$black-500: #292d32;
+$shadow-black: rgba(236, 225, 203, 0.25);
+
+$black-900: #202020;
+$black: #000;
+
+//white
+$white: #fff;
+
+//red
+$red-900: #ed1c24;
+$red: red;
+
+//orange
+$orange-100: #fbf0e7;
+$orange-800: #fd8312;
+$orange-900: #f5822b;
+$orange: orange;
+
+// fonts
+
+/**
+* Media Breakpoints Sizes:
+* - Tablet from 768px --> 1024px
+* - Desktop from 1024px --> 1366px and more
+*/
+$bp-max-mobile: 600px;
+$bp-lg-mobile-max-tablet-min: 768px;
+$bp-max-tablet: 992px;
+$bp-tablet-max: 1024px;
+$bp-desktop-min: 1440px;
+
+$border-1: 5px;
+
+$box-shadow: 2px 10px 250px rgb($blue-100, 0.1);

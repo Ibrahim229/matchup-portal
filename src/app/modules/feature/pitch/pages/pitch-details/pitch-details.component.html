@@ -1,0 +1,75 @@
+<div class="page-container details-page" RtlDir>
+    <div class="page-content">
+        <div class="content-section">
+            <h4 class="tab-headline">{{'PITCH.PITCH_DETAILS' | translate}}</h4>
+            <div class="details-container">
+                <div class="details-row equal-columns">
+                    <div class="details-col">
+                        <span>{{'PITCH.PITCH_NAME' | translate}}</span>
+                        <span>{{pitchDetails?.name}}</span>
+                    </div>
+                    <div class="details-col">
+                        <span>{{'PITCH.PITCH_PRICE' | translate}}</span>
+                        <span>{{+pitchDetails?.price}}</span>
+                    </div>
+                </div>
+                <div class="details-row">
+                    <div class="details-col">
+                        <span>{{'PITCH.PITCH_DESCRIPTION' | translate}}</span>
+                        <span>{{pitchDetails?.description}}</span>
+                    </div>
+                </div>
+                <div class="details-row">
+                    <div class="details-col">
+                        <span>{{'PITCH.PITCH_GROUND_TYPE' | translate}}</span>
+                        <span>{{pitchDetails?.groundType}}</span>
+                    </div>
+                    <div class="details-col">
+                        <span>{{'PITCH.PITCH_SETTING_TYPE' | translate}}</span>
+                        <span>{{pitchDetails?.pitchSetting}}</span>
+                    </div>
+                    <div class="details-col">
+                        <span>{{'PITCH.PLAYERS_NUMBER' | translate}}</span>
+                        <span>{{+pitchDetails?.playersNumber}}</span>
+                    </div>
+                </div>
+                <div class="details-row">
+                    <div class="details-col">
+                        <div class="form-control-wrapper map-wrapper">
+                            <span>{{'PITCH.PITCH_LOCATION' | translate}}</span>
+                            <img [src]="generateMapImageUrl(pitchDetails?.location)" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="content-section mt-3">
+            <h4 class="tab-headline">{{'PITCH.PITCH_IMAGES' | translate}}</h4>
+            <div class="details-container">
+                <div class="details-row">
+                    <div class="details-col">
+                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" #carousel>
+                            <div class="carousel-inner">
+                                <div class="carousel-item " [ngClass]="{'active' : i === 0}"
+                                    *ngFor="let image of pitchDetails?.pitchPic;let i = index">
+                                    <img class="d-block w-100" [src]="image" alt="slider image">
+                                </div>
+                            </div>
+
+                            <a class="carousel-control-prev" (click)="prevSlide()" role="button" data-slide="prev"
+                                *ngIf="pitchDetails?.pitchPic.length > 1">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" (click)="nextSlide()" role="button" data-slide="next"
+                                *ngIf="pitchDetails?.pitchPic.length > 1">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

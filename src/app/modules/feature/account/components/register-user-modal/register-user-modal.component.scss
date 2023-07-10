@@ -1,0 +1,44 @@
+@import "abstracts/variables";
+
+.register-user {
+  &__form {
+    h1 {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+    &__result {
+      text-align: center;
+      h6 {
+        margin-bottom: 10px;
+        font-weight: bold;
+        &:first-of-type {
+          color: $green-900;
+        }
+      }
+      p {
+        background-color: $grey;
+        padding: 20px 0;
+        border-radius: 5px;
+        outline: 1px dashed $green-900;
+        font-size: 17px;
+        margin: 15px 0;
+      }
+    }
+    &__actions {
+      display: flex;
+      gap: 10px;
+    }
+  }
+  &.rtl {
+    .register-user__form {
+      font-family: "Cairo", sans-serif !important;
+      h1 {
+        font-family: "Cairo", sans-serif !important;
+        text-align: end;
+      }
+      &__actions {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+}

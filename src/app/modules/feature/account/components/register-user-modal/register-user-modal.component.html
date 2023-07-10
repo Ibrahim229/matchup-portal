@@ -1,0 +1,58 @@
+<div class="register-user" RtlDir>
+    <div class="register-user__form">
+        <div>
+            <h1 mat-dialog-title *ngIf="!isNewUserRegistered">{{'ACCOUNT.REGISTER_USER'
+                |
+                translate}}</h1>
+            <div class="form-control-wrapper" *ngIf="!isNewUserRegistered">
+                <form-input [label]="'LABELS.FORM.USER_NAME'" [type]="InputTypes.TEXT" [FormControl]="userName">
+                </form-input>
+            </div>
+
+            <div class="register-user__form__result" *ngIf="isNewUserRegistered">
+                <div>
+                    <h6>
+                        {{'ACCOUNT.NEW_USER_REGISTERED'
+                        |
+                        translate}}
+                    </h6>
+                    <h6>
+                        {{'ACCOUNT.SAVE_USER_CREDENTIALS'
+                        |
+                        translate}}
+                    </h6>
+                    <bdi>
+                        <p>
+                            {{'LABELS.FORM.USER_NAME'
+                            |
+                            translate}}: {{registeredUserDetails.username}}
+                            <br />
+                            {{'LABELS.FORM.PASSWORD'
+                            |
+                            translate}}: {{registeredUserDetails.password}}
+                        </p>
+                    </bdi>
+                </div>
+
+            </div>
+
+            <div class="register-user__form__actions">
+                <button class="btn-fill" *ngIf="!isNewUserRegistered"
+                    [disabled]="isNewUserSubmitting || userName.invalid" (click)="onRegisterUser()">
+                    {{ 'ACTIONS.CONFIRM' | translate }}
+                    <div class="mx-2 spinner-border text-success" role="status" *ngIf="isNewUserSubmitting">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </button>
+                <button class="btn-outlined" *ngIf="!isNewUserRegistered" (click)="onDismiss()">
+                    {{'ACTIONS.CANCEL' | translate}}
+                </button>
+
+                <button class="btn-fill" *ngIf="isNewUserRegistered" (click)="onDismiss()">
+                    {{ 'ACTIONS.OK' | translate }}
+                </button>
+
+            </div>
+        </div>
+    </div>
+</div>

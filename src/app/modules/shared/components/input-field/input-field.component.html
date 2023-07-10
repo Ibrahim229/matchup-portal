@@ -1,0 +1,19 @@
+<!-- <div [class]="gridClass"> -->
+<div class="input-container" [formGroup]="formGroup" RtlDir>
+    <label class="label" [attr.for]="controlName">{{ label | translate }}</label>
+    <div class="input-wrapper">
+        <input [type]="show ? 'text' : type" [min]="type === 'number' ? min : ''" [name]="controlName"
+            [placeholder]="placeholder" [id]="controlName" [formControlName]="controlName"
+            [ngClass]="{'field-error': formGroup.get(controlName)?.errors && formGroup.get(controlName)?.dirty}"
+            autocomplete="password" />
+        <span class="password-eye" (click)="show = !show " *ngIf="type === 'Password'">
+            <i class="fa fa-light fa-eye"></i></span>
+    </div>
+</div>
+<div class="ctrl-error" *ngIf="formGroup.get(controlName)?.invalid && 
+    formGroup.get(controlName)?.errors && 
+    (formGroup.get(controlName)?.dirty || formGroup.get(controlName)?.touched)">
+    <div *ngIf="formGroup.get(controlName)?.hasError('required')">
+        {{"LABELS.FORM.VALIDATIONS.FIELD_IS_REQUIRED" | translate}}
+    </div>
+</div>

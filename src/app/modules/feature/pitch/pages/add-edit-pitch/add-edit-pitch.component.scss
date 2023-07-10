@@ -1,0 +1,25 @@
+@import "abstracts/variables";
+
+.add-edit-page {
+  .tab-container {
+    .add-btn-wrapper {
+      button {
+        width: 20%;
+      }
+    }
+    ::ng-deepgoogle-map {
+      .map-container {
+        .map-search-field {
+          top: 15px !important;
+          left: 33% !important;
+          padding: 17px;
+          width: 40%;
+          text-align: center;
+          border-radius: 5px;
+          border: 1px solid $grey-500;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

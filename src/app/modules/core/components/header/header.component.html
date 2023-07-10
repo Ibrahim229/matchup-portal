@@ -1,0 +1,35 @@
+<div class="header-wrapper" RtlDir>
+    <div class="logo">
+        <img src="assets/images/logo/logo.svg" alt="acacia logo" height="60" />
+    </div>
+    <div>
+        <div class="language-controls">
+            <div (click)="changeLang('ar')" *ngIf="currentLanguage === 'en'">
+                <!-- <img src="assets/images/logo/arabic.png" alt="ar logo" /> -->
+                AR
+            </div>
+            <div (click)="changeLang('en')" *ngIf="currentLanguage === 'ar'">
+                <!-- <img src="assets/images/logo/english.png" alt="en logo" /> -->
+                EN
+            </div>
+        </div>
+        <div class="user-info" mat-button [matMenuTriggerFor]="menu">
+            <!-- <h5>Hi, <span>{{currentUser['userName']}}</span></h5> -->
+            <h5><span>{{currentUser['userName']}}</span></h5>
+            <div>
+                <span>
+                    {{currentUser['userName']?.charAt(0).toUpperCase()}}
+                </span>
+                <span>
+                    <i class="fa fa-light fa-chevron-down"></i>
+                </span>
+                <!-- <button mat-button [matMenuTriggerFor]="menu">Menu</button> -->
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item [routerLink]="'/account/change-password'" RtlDir>{{'ACTIONS.CHANGE_PASSWORD'
+                        | translate}}</button>
+                    <button mat-menu-item (click)="handleLogout()" RtlDir>{{'ACTIONS.LOGOUT' | translate}}</button>
+                </mat-menu>
+            </div>
+        </div>
+    </div>
+</div>

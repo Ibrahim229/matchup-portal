@@ -1,0 +1,52 @@
+.err-msg {
+  color: $red;
+}
+
+.field-error {
+  border: 1px solid $red;
+}
+
+.err-bck,
+.success-bck,
+.warning-bck {
+  color: #fff;
+}
+.err-bck {
+  background-color: $red;
+}
+.success-bck {
+  background-color: $green-700;
+}
+.warning-bck {
+  background-color: $orange-800;
+}
+
+.ctrl-error {
+  color: $red;
+  margin-bottom: 10px;
+}
+
+.tab-headline {
+  position: relative;
+  margin-bottom: 45px;
+  &::after {
+    content: " ";
+    width: 91px;
+    color: black;
+    background: $green-900;
+    height: 5px;
+    position: absolute;
+    bottom: -15px;
+    left: 3px;
+    border-radius: 8px;
+  }
+}
+
+.rtl {
+  .tab-headline {
+    &::after {
+      right: 3px;
+      left: unset;
+    }
+  }
+}

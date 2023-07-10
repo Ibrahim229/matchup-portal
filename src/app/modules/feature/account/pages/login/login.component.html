@@ -1,0 +1,35 @@
+<div class="login__form">
+    <h2>{{"ACCOUNT.SIGN_IN" | translate}}</h2>
+    <!-- <p>
+        <span>
+            {{"ACCOUNT.DO_NOT_HAVE_ACCOUNT" | translate}}
+        </span>
+        <a [routerLink]="'/register'">
+            {{"ACCOUNT.SIGN_UP" | translate}}
+        </a>
+    </p> -->
+    <form [formGroup]="loginForm" autocomplete="off" (ngSubmit)="onLogin(loginForm)">
+        <div class="row">
+            <div class="form-control-wrapper">
+                <form-input [label]="'LABELS.FORM.USER_NAME'" [type]="InputTypes.TEXT"
+                    [FormControl]="formControl('userName')">
+                </form-input>
+            </div>
+            <div class="form-control-wrapper">
+                <form-input [label]="'LABELS.FORM.PASSWORD'" [type]="InputTypes.PASSWORD"
+                    [FormControl]="formControl('password')">
+                </form-input>
+            </div>
+            <!-- <div class="forgot-wrapper">
+                <a [routerLink]="'/forgot-password'">
+                    {{"ACCOUNT.FORGOT_PASS" | translate}}
+                </a>
+            </div> -->
+            <div class="btn-wrapper">
+                <button class="ac-btn btn-fill" [disabled]="loginForm.invalid">
+                    {{"ACTIONS.SUBMIT" | translate}}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>

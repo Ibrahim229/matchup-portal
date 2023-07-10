@@ -1,0 +1,8 @@
+<div *ngIf="shouldShowErrors()">
+  <ng-container *ngFor="let error of listOfErrors()">
+    <div class="error-message">
+      <i class="fa-solid fa-xmark"></i>
+      <p>{{ error | translate }}</p>
+    </div>
+  </ng-container>
+</div>

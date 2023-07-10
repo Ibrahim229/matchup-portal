@@ -1,0 +1,23 @@
+.page-container {
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 25px;
+    background-color: #fff;
+    .btn-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      form-input {
+        margin-bottom: -25px;
+      }
+    }
+  }
+  .page-content {
+    background-color: #fff;
+    padding: 24px 25px;
+    margin: 24px;
+    border-radius: 5px;
+  }
+}

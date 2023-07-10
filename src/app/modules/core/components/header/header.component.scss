@@ -1,0 +1,89 @@
+@import "abstracts/variables";
+
+.header-wrapper {
+  display: flex;
+  padding: 13px 20px;
+  background-color: $white;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $grey-350;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .language-controls {
+      padding: 0 25px;
+      div {
+        background: linear-gradient(172deg, #47858b -15.74%, #4e55a2 111.09%);
+        padding: 6px;
+        border-radius: 5px;
+        color: #fff;
+        cursor: pointer;
+      }
+    }
+    .user-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: max-content;
+      gap: 10px;
+      cursor: pointer;
+      h5 {
+        margin-bottom: 0;
+        color: $grey-300;
+        // max-width: 50px;
+        text-align: end;
+        font-size: 18px;
+
+        span {
+          color: $grey-500;
+          font-weight: 700;
+        }
+      }
+      div {
+        position: relative;
+        gap: 10px;
+        span:first-of-type {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #ffcb14;
+          border-radius: 50%;
+          width: 44px;
+          height: 44px;
+          color: #fff;
+          cursor: pointer;
+        }
+        div {
+          position: absolute;
+          width: 177px;
+          background-color: $white;
+          left: -145px;
+          color: $black;
+          border-radius: 5px;
+          padding: 10px;
+          font-size: 14px;
+          // min-height: 90px;
+          border: 1px solid $green-700;
+          li {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    &.rtl {
+      ::ng-deepmat-menu {
+        font-family: "Cairo", sans-serif !important;
+      }
+      .user-info {
+        div {
+          div {
+            left: unset;
+            right: -145px;
+          }
+        }
+      }
+    }
+  }
+}

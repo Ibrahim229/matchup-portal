@@ -1,0 +1,54 @@
+<div class="page-container contracts-listing">
+    <div class="page-header">
+        <h4>
+            {{ 'ACCOUNT.ACCOUNT_MANAGEMENT' | translate }}
+        </h4>
+        <div class="btn-wrapper">
+            <button class="ac-btn btn-fill" (click)="handleRegisterUser()" *ngIf="isHasRole(RoleType.Super_Admin)">
+                {{'ACTIONS.ADD_NEW_USER' | translate }}
+            </button>
+        </div>
+    </div>
+    <div class="page-content">
+        <section class="table-wrapper">
+            <data-table class="preview__table" [pagination]="false" [dataSource]="(usersTable$ | async)!"
+                *ngIf="usersTable$">
+                <ng-template #tableHead>
+                    <tr>
+                        <th>{{'LABELS.FORM.USER_NAME' | translate}}</th>
+                        <!-- <th>{{'LABELS.FORM.EMAIL' | translate}}</th> -->
+                        <th>{{'LABELS.FORM.Role' | translate}}</th>
+                        <th *ngIf="isHasRole(RoleType.Super_Admin)">{{'ACTIONS.ACTIONS' | translate}}</th>
+                    </tr>
+                </ng-template>
+                <ng-template #tableRows let-row>
+                    <tr>
+                        <td>
+                            {{row?.fullName}}
+                        </td>
+                        <!-- <td>
+                            {{row?.email}}
+                        </td> -->
+                        <td>
+                            {{row?.role ? row?.role : '-'}}
+                        </td>
+                        <td RtlDir *ngIf="isHasRole(RoleType.Super_Admin)">
+                            <button mat-button [matMenuTriggerFor]="menu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                            </button>
+                            <mat-menu #menu="matMenu" RtlDir>
+                                <button mat-menu-item RtlDir (click)="handleRemoveUser(row?._id)">{{'ACTIONS.DELETE' |
+                                    translate}}</button>
+                            </mat-menu>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template #loaderRef></ng-template>
+            </data-table>
+        </section>
+    </div>
+</div>
+
+<!-- <mwl-calendar-day-view [viewDate]="viewDate" [events]="events">
+</mwl-calendar-day-view> -->

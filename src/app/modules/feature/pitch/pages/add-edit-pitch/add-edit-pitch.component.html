@@ -1,0 +1,97 @@
+<div class="add-edit-page" RtlDir>
+    <div class="content-container">
+        <form [formGroup]="addEditPitch" autocomplete="off" (ngSubmit)="onAddPitch(addEditPitch)">
+            <mat-stepper class="form-stepper" [orientation]="(stepperOrientation | async)!"
+                (selectionChange)="onSelection($event)" [selectedIndex]="selectedIndex" RtlDir>
+                <mat-step [label]="'PITCH.PITCH_DETAILS' | translate" [stepControl]="formGroup('pitchDetails')">
+                    <form [formGroup]="formGroup('pitchDetails')" autocomplete="off">
+                        <div class="tab-container">
+                            <h4 class="tab-headline">{{editMode ? ('PITCH.PITCH_DETAILS' | translate) :
+                                ('PITCH.ADD_PITCH_DETAILS') | translate}}</h4>
+                            <div class="form-wrapper">
+                                <div class="form-control-wrapper">
+                                    <form-input [label]="'PITCH.PITCH_NAME'" [type]="InputTypes.TEXT"
+                                        [FormControl]="formControl('pitchDetails','name')">
+                                    </form-input>
+                                </div>
+                                <div class="form-control-wrapper">
+                                    <form-input [label]="'PITCH.PITCH_DESCRIPTION'" [type]="InputTypes.TEXT_AREA"
+                                        [FormControl]="formControl('pitchDetails','description')">
+                                    </form-input>
+                                </div>
+                                <div class="form-control-wrapper">
+                                    <form-input [label]="'PITCH.PITCH_PRICE'" [type]="InputTypes.TEXT"
+                                        [FormControl]="formControl('pitchDetails','price')">
+                                    </form-input>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-control-wrapper">
+                                        <form-input [label]="'PITCH.PITCH_GROUND_TYPE' | translate"
+                                            [type]="InputTypes.SELECT" [selectOptions]="{
+                            list: groundTypes,
+                            }" [FormControl]="formControl('pitchDetails','groundType')">
+                                        </form-input>
+                                    </div>
+                                    <div class="form-control-wrapper">
+                                        <form-input [label]="'PITCH.PITCH_SETTING_TYPE' | translate"
+                                            [type]="InputTypes.SELECT" [selectOptions]="{
+                        list: pitchSettingTypes,
+                        }" [FormControl]="formControl('pitchDetails','pitchSetting')">
+                                        </form-input>
+                                    </div>
+                                </div>
+                                <div class="form-control-wrapper">
+                                    <form-input [label]="'PITCH.PLAYERS_NUMBER'" [type]="InputTypes.TEXT"
+                                        [FormControl]="formControl('pitchDetails','playersNumber')">
+                                    </form-input>
+                                </div>
+                                <div class="form-control-wrapper">
+                                    <h6>{{'PITCH.PITCH_LOCATION' | translate}}</h6>
+                                    <input #mapSearchField class="map-search-field" type="text" />
+                                    <google-map (mapClick)="addMarker($event)" width="100%" height="500px"
+                                        [options]="options">
+                                        <map-marker *ngFor="let markerPosition of markerPositions"
+                                            [position]="markerPosition" [options]="markerOptions"></map-marker>
+
+                                    </google-map>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [label]="'PITCH.PITCH_IMAGES' | translate">
+                    <div class="tab-container">
+                        <h4 class="tab-headline">{{'PITCH.PITCH_IMAGES' | translate}}</h4>
+                        <div class="form-control-wrapper mt-5">
+                            <upload-file label="PITCH.ADD_PITCH_IMAGES" [singleFile]="false" [editMode]="editMode"
+                                [formControl]="formControl('attachments','images')" [oldAttachments]="oldAttachments"
+                                [allowedTypes]="allowedTypes" (onAttachmentChange)="onAttachmentsChange($event)"
+                                canAccept="application/pdf,image/png,image/jpeg,image/tiff
+                    ">
+                            </upload-file>
+                        </div>
+                    </div>
+                </mat-step>
+
+            </mat-stepper>
+            <div class="add-edit-actions mt-1">
+                <div>
+                    <button type="button" class="ac-btn btn-outlined" (click)="handleCancel()">
+                        {{"ACTIONS.CANCEL" | translate}}
+                    </button>
+                    <button type="button" class="ac-btn btn-outlined" (click)="handleBack()" *ngIf="selectedIndex > 0">
+                        {{"ACTIONS.BACK" | translate}}
+
+                    </button>
+                    <button type="button" class="ac-btn btn-fill" (click)="handleNext()" *ngIf="selectedIndex !== 4">
+                        {{"ACTIONS.NEXT" | translate}}
+
+                    </button>
+                    <button type="submit" class="ac-btn btn-outlined" [disabled]="addEditPitch.invalid">
+                        {{"ACTIONS.SAVE" | translate}}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

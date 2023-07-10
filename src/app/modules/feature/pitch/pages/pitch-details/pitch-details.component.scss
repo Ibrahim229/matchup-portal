@@ -1,0 +1,40 @@
+@import 'abstracts/variables';
+
+.details-container {
+  background-color: #f6f6f6;
+  .details-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    .details-col {
+      align-items: start;
+      span:first-of-type {
+        color: $blue-500;
+      }
+      .map-wrapper {
+        display: flex;
+        flex-direction: column;
+        span {
+          margin-bottom: 15px;
+        }
+        img {
+          max-width: 100%;
+          border: 1px solid $green-900;
+        }
+      }
+    }
+    &.equal-columns {
+      grid-template-columns: repeat(auto-fill, minmax(275px, 1fr));
+    }
+  }
+}
+
+.carousel {
+  width: 600px !important;
+  height: 400px;
+  .carousel-item {
+    img {
+      width: 600px !important;
+      height: 400px !important;
+    }
+  }
+}

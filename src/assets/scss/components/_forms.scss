@@ -1,0 +1,121 @@
+.add-edit-page {
+  display: grid;
+  column-gap: 15px;
+  height: 100%;
+  .content-container {
+    margin: 2%;
+    border-radius: 20px;
+    padding: 15px 20px;
+    .tab-container {
+      .form-row {
+        display: grid;
+        column-gap: 15px;
+        grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+        &.equal-columns {
+          grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+        }
+      }
+      h6 {
+        margin-bottom: 15px;
+      }
+      .form-toggle-wrapper {
+        align-items: center;
+        display: flex;
+        height: 62px;
+      }
+    }
+    .add-edit-actions {
+      border-radius: 9px;
+      background-color: #fff;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: flex-end;
+      div {
+        display: flex;
+        gap: 15px;
+        background-color: #fff;
+        button {
+          width: 120px;
+        }
+      }
+    }
+  }
+  &.rtl {
+    font-family: "Cairo", sans-serif !important;
+  }
+}
+
+.details-container {
+  background-color: #eee;
+  padding: 20px;
+  border-radius: 12px;
+  .details-row {
+    display: flex;
+    justify-content: space-between;
+    &:not(:last-of-type) {
+      margin-bottom: 25px;
+    }
+    .details-col {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      align-items: center;
+      span {
+        &:first-of-type {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+.mat-stepper-horizontal,
+.mat-stepper-vertical {
+  background-color: transparent;
+  height: 95%;
+  &.rtl {
+    font-family: "Cairo", sans-serif !important;
+    .mat-horizontal-stepper-header .mat-step-icon {
+      margin-right: unset;
+      margin-left: 8px;
+    }
+  }
+}
+.mat-horizontal-stepper-header-container {
+  gap: 24px;
+  flex-direction: column;
+  padding: 15px 0;
+  border-radius: 6px;
+  background-color: #fff;
+}
+.mat-step-header[aria-selected="true"] {
+  background-color: #f4f4f4;
+  border-radius: 9px;
+}
+
+.mat-step-header {
+  width: 165px !important;
+}
+.mat-horizontal-stepper-wrapper {
+  display: grid !important;
+  grid-template-columns: 260px calc(100% - 270px) !important;
+  column-gap: 15px !important;
+  height: 99%;
+}
+.mat-horizontal-content-container {
+  border: 1px solid #eee;
+  border-radius: 9px;
+  padding: 24px 24px 24px 24px !important;
+  background-color: #fff;
+}
+
+.mat-stepper-horizontal-line {
+  display: none;
+}
+.mat-step-header:hover:not([aria-disabled]) {
+  border-radius: 9px;
+}
+.mat-horizontal-stepper-content {
+  position: relative;
+  height: 100%;
+}

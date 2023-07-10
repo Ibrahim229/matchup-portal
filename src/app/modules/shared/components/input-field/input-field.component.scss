@@ -1,0 +1,70 @@
+@import "abstracts/variables";
+@import "abstracts/mixins";
+
+.input-container {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+ 
+  label {
+    font-weight: 400;
+    color: #5d5f6f;
+    font-size: 14px;
+    margin-bottom: 6px;
+  }
+  .input-wrapper {
+    position: relative;
+    width: 100%;
+    input {
+      background: #fafafc;
+      border: 1px solid #edeef6;
+      border-radius: 6px;
+      color: #5d5f6f;
+      height: 42px;
+      width: 100%;
+      padding-inline: 10px;
+      transition: all 0.3s ease-in-out;
+      // &:hover {
+      //   @include shadow();
+      // }
+      &:focus {
+        //   @include shadow();
+        outline: unset;
+      }
+      &.ng-dirty.ng-invalid {
+        border: 1px solid #c93c3c;
+      }
+      &.ng-dirty.ng-valid {
+        border: 1px solid #47858b;
+        box-shadow: 0 0 10px #dae7e8;
+      }
+    }
+    .password-eye {
+      position: absolute;
+      right: 12px;
+      color: #4e57a1;
+      font-size: 18px;
+      cursor: pointer;
+      bottom: 6px;
+    }
+  }
+  &.rtl {
+    direction: rtl;
+    .password-eye {
+        right: unset !important;
+        left: 12px;
+    }
+  }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}

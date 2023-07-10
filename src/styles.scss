@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/ngx-toastr/toastr";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import "./assets/scss/app";
+@import "abstracts/variables";
+
+.mat-menu-item.rtl,
+.rtl .mat-menu-item {
+  font-family: "Cairo", sans-serif !important;
+  text-align: right;
+}
+
+.mat-datepicker-content .mat-calendar {
+  font-family: "Cairo", sans-serif !important;
+}
+
+.mat-calendar-body-label,
+.mat-calendar-period-button {
+  font-family: "Cairo", sans-serif !important;
+}
+
+.mat-slide-toggle {
+  .mat-slide-toggle-label {
+    gap: 5px;
+  }
+  .mat-slide-toggle-content {
+    font-family: "Cairo", sans-serif !important;
+  }
+  &.mat-checked .mat-slide-toggle-thumb {
+    background-color: #4e55a2;
+  }
+  &.mat-checked .mat-slide-toggle-bar {
+    background-color: rgb(78 85 162 / 54%);
+  }
+}
+
+.rtl {
+  .mat-slide-toggle {
+    .mat-slide-toggle-label {
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(221 221 221 / 28%);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $grey-400;
+  border-radius: 6px;
+}
+
+.mat-simple-snack-bar-content {
+  font-size: 1.5em;
+  display: inline-block;
+  padding: 3px;
+}

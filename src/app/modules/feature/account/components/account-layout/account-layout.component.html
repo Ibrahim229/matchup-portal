@@ -1,0 +1,39 @@
+<div class="account" RtlDir>
+    <div class="switch-lang">
+        <!-- <img (click)="changeLang('ar')" *ngIf="currentLang === Lang.english" src="assets/images/logo/arabic.png"
+            alt="Arabic language" title="اللغة العربية" />
+             -->
+        <span (click)="changeLang('ar')" *ngIf="currentLang === Lang.english">AR</span>
+
+        <!-- <img (click)="changeLang('en')" *ngIf="currentLang === Lang.arabic" src="assets/images/logo/english.png"
+            alt="Arabic language" title="English" /> -->
+        <span (click)="changeLang('en')" *ngIf="currentLang === Lang.arabic">EN</span>
+
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="offset-md-1 col-md-5 col-12">
+                <div class="account__info">
+                    
+                    <h2>
+                        {{'LABELS.WELCOME_TO' | translate}}
+                    </h2>
+                    <img src="assets/images/logo/logo.svg" alt="acacia logo" />
+                    <!-- <h2 class="linear-text">
+                        {{'LABELS.ACACIA' | translate}}
+                    </h2> -->
+                </div>
+            </div>
+            <div class="col-md-5 col-12">
+                <div class="account__form">
+                    <router-outlet></router-outlet>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="overlay" *ngIf="loaderService.showLoading">
+    <mat-progress-spinner class="spinner" mode="indeterminate">
+    </mat-progress-spinner>
+</div> -->

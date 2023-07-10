@@ -1,0 +1,22 @@
+<div class="confirmation-dialog" RtlDir>
+  <div class="confirmation-dialog__content">
+    <span class="confirmation-dialog__icon" [ngClass]="iconClass ? iconClass : 'fa-solid fa-trash'"></span>
+    <div>
+      <h3>{{'LABELS.FORM.YOU_ARE_ABOUT' | translate}} <span> {{title | translate}} {{itemIndex}}</span></h3>
+
+      <div class="confirmation-dialog__message">
+        <i class="fa fa-light fa-flag-pennant"></i>
+        <p>{{ message | translate }}</p>
+      </div>
+
+      <div class="confirmation-dialog__actions">
+        <button class="confirmation-dialog__actions__confirm" (click)="onConfirm()">
+          {{ actionLabel | translate }}
+        </button>
+        <button class="confirmation-dialog__actions__dismiss" (click)="onDismiss()">
+          {{'ACTIONS.CANCEL' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

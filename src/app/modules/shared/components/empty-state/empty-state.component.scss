@@ -1,0 +1,31 @@
+@import "abstracts/variables";
+
+.empty-state-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 40px 0px;
+  color: #d1d1d1;
+  min-height: 250px;
+
+  .state-icon::before {
+    font-size: 4.375rem;
+    padding: 0;
+  }
+
+  .state-text-container {
+    padding: 16px 0px;
+    color: $grey-500;
+    text-align: center;
+    line-height: 24px;
+
+    .state-text {
+      margin: 0;
+      line-height: 24px;
+      opacity: 50%;
+      font-size: 15px;
+      letter-spacing: 0.7px;
+    }
+  }
+}

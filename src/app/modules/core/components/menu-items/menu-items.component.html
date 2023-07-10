@@ -1,0 +1,28 @@
+<mat-expansion-panel routerLinkActive="active" [expanded]="checkCurrentRoute(menuItem.route)">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <!-- Cabeceras del submenu -->
+      <div routerLinkActive="active" class="link-item">
+        <a routerLinkActive="active">
+          <span class="icon" [ngClass]="menuItem.iconClasses"></span>
+          <span class="link"> {{ menuItem.label | translate }}</span>
+        </a>
+      </div>
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-container *ngFor="let child of menuItem.children">
+    <ng-container *ngIf="child !== false">
+      <ng-container *ngIf="child?.children?.length > 0; else elseTemplate">
+        <menu-items [menuItem]="child"></menu-items>
+      </ng-container>
+    </ng-container>
+    <ng-template #elseTemplate>
+      <div routerLinkActive="active" class="link-item">
+        <a routerLinkActive="active" [routerLink]="child.route">
+          <span class="icon" [ngClass]="child.iconClasses"></span>
+          <span class="link"> {{ child.label | translate}}</span>
+        </a>
+      </div>
+    </ng-template>
+  </ng-container>
+</mat-expansion-panel>

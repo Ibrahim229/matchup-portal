@@ -1,0 +1,55 @@
+<div class="page-container property-listing">
+    <div class="page-header">
+        <h4>{{'PITCH.PITCHES' | translate }}</h4>
+        <div class="btn-wrapper">
+            <button class="ac-btn btn-fill" [routerLink]="['/pitches/add-pitch']">
+                {{"PITCH.ADD_NEW_PITCH" | translate }}
+            </button>
+        </div>
+    </div>
+    <div class="page-content">
+        <section class="table-wrapper">
+            <data-table class="preview__table" [pagination]="false" [dataSource]="(pitchTable$ | async)!"
+                *ngIf="pitchTable$">
+                <ng-template #tableHead>
+                    <tr>
+                        <th>{{'PITCH.PITCH_IMAGE' | translate}}</th>
+                        <th>{{'PITCH.PITCH_NAME' | translate}}</th>
+                        <th>{{'ACTIONS.ACTIONS' | translate}}</th>
+                    </tr>
+                </ng-template>
+                <ng-template #tableRows let-row>
+                    <tr>
+                        <td>
+                            <img src="{{row?.pitchPic[0] ? row?.pitchPic[0] : 'assets/images/default-img.jpg'}}"
+                                alt="pitch-logo" />
+                        </td>
+                        <td>
+                            {{row?.name}}
+                        </td>
+                        <td RtlDir>
+                            <button mat-button [matMenuTriggerFor]="menu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                            </button>
+                            <mat-menu #menu="matMenu" RtlDir>
+                                <button mat-menu-item RtlDir
+                                    [routerLink]="['details', row?._id]">{{'LABELS.VIEW_DETAILS' |
+                                    translate}}</button>
+                                <button mat-menu-item RtlDir [routerLink]="['/pitches/edit-pitch', row?._id]"
+                                    *ngIf="isHasRole(RoleType.Admin)">{{'ACTIONS.EDIT'
+                                    |
+                                    translate}}</button>
+                                <button mat-menu-item RtlDir (click)="handleRemovePitch(row._id)">{{'ACTIONS.DELETE'
+                                    |
+                                    translate}}</button>
+                            </mat-menu>
+
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template #loaderRef></ng-template>
+            </data-table>
+        </section>
+    </div>
+</div>

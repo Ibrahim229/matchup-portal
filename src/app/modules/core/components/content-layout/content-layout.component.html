@@ -1,0 +1,15 @@
+<div class="internal-wrapper" RtlDir>
+  <div class="content-wrapper">
+    <div class="header-container">
+      <app-header></app-header>
+    </div>
+    <div class="content-container">
+      <div class="side-menu-container">
+        <side-nav [menuItems]="menuItems"></side-nav>
+      </div>
+      <div class="layout-container">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

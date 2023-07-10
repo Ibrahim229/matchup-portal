@@ -1,0 +1,22 @@
+<div class="form-input-container" RtlDir>
+    <mat-form-field appearance="fill" class="form-input">
+        <mat-label class="form-input__label">{{ label | translate }}</mat-label>
+        <input matInput *ngIf="!isRangeDatePicker" [matDatepicker]="dpicker" [formControl]="formControl">
+
+        <mat-date-range-input *ngIf="isRangeDatePicker" [rangePicker]="rangePicker">
+            <input matStartDate [placeholder]="'LABELS.FORM.STARTING_DATE' | translate"
+                [formControl]="datePicker.start" />
+            <input matEndDate [placeholder]="'LABELS.FORM.END_DATE' | translate" [formControl]="datePicker.end" />
+        </mat-date-range-input>
+
+        <mat-datepicker-toggle *ngIf="!isRangeDatePicker" matSuffix [for]="dpicker"></mat-datepicker-toggle>
+        <mat-datepicker-toggle *ngIf="isRangeDatePicker" matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+        <mat-date-range-picker #rangePicker></mat-date-range-picker>
+        <mat-datepicker #dpicker></mat-datepicker>
+
+        <mat-error>
+            <error-message [ctrl]="datePicker.start || datePicker.end">
+            </error-message>
+        </mat-error>
+    </mat-form-field>
+</div>

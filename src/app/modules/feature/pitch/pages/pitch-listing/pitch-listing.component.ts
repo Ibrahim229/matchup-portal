@@ -13,6 +13,7 @@ import { isHasRole } from 'src/app/modules/shared/utils/isHasRole';
 import { PitchService } from '../../services/pitch/pitch.service';
 import { ToastrService } from 'src/app/modules/shared/services/toastr/toastr.service';
 import { ToastrTypes } from 'src/app/modules/shared/enums/toastrTypes';
+import { PitchOpenTimeModalComponent } from '../../components/pitch-open-time-modal/pitch-open-time-modal.component';
 
 @Component({
   selector: 'pitch-listing',
@@ -76,6 +77,25 @@ export class PitchListingComponent implements OnInit, OnDestroy {
         pageIndex: 1,
         emptyState: 'LABELS.NO_DATA',
       });
+    });
+  }
+
+  handleUpdateWorkingHours(currentPitch) {
+    const dialogData = {
+      pitchDetails: currentPitch,
+    };
+    const dialogRef = this.dialog.open(PitchOpenTimeModalComponent, {
+      maxWidth: '550px',
+      minWidth: '500px',
+      disableClose: true,
+      data: dialogData,
+    });
+    return dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.getPitches();
+      } else {
+        return res;
+      }
     });
   }
 

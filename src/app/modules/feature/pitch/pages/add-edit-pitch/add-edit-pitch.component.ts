@@ -6,6 +6,7 @@ import {
   ElementRef,
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import {
   FormArray,
@@ -31,6 +32,9 @@ import { GroundType } from '../../enums/ground-type.enum';
 import { PitchSetting } from '../../enums/pitch-setting.enum';
 import { GoogleMap } from '@angular/google-maps';
 import { ToastrTypes } from 'src/app/modules/shared/enums/toastrTypes';
+import { numbersOnlyValidator } from 'src/app/modules/shared/utils/custom-validator';
+import { ConfirmationDialog } from 'src/app/modules/shared/_models/dialog-confirmation.model';
+import { ConfirmDialogComponent } from 'src/app/modules/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'add-edit-pitch',
@@ -48,7 +52,6 @@ export class AddEditPitchComponent implements OnInit, OnDestroy, AfterViewInit {
   subs = new Subscriptions();
   editMode: boolean = false;
   oldAttachments: any[] = [];
-  attachment: any;
   pitchId: any;
   Lang = Lang;
   groundTypes = [GroundType.GRASS, GroundType.TARTAN];
@@ -63,6 +66,7 @@ export class AddEditPitchComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(GoogleMap) map: GoogleMap;
   markerOptions: google.maps.MarkerOptions = { draggable: false };
   markerPositions: google.maps.LatLngLiteral[] = [];
+  addedAttachments = [];
 
   constructor(
     private fb: FormBuilder,
@@ -72,17 +76,29 @@ export class AddEditPitchComponent implements OnInit, OnDestroy, AfterViewInit {
     public dialog: MatDialog,
     private toastrService: ToastrService,
     private activatedRoute: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cdr: ChangeDetectorRef
   ) {
     this.addEditPitch = this.fb.group({
       pitchDetails: this.fb.group({
         id: [null],
         name: ['', [Validators.required]],
         description: [''],
-        price: [null, [Validators.required]],
+        price: [
+          null,
+          [Validators.required, numbersOnlyValidator(), Validators.min(1)],
+        ],
         groundType: ['', [Validators.required]],
         pitchSetting: ['', [Validators.required]],
-        playersNumber: ['', [Validators.required]],
+        playersNumber: [
+          '',
+          [
+            Validators.required,
+            numbersOnlyValidator(),
+            Validators.min(1),
+            Validators.max(11),
+          ],
+        ],
         location: this.fb.group({
           type: 'Point',
           coordinates: [''],
@@ -174,6 +190,11 @@ export class AddEditPitchComponent implements OnInit, OnDestroy, AfterViewInit {
 
   onAttachmentsChange(selectedFiles: any) {
     this.pitchAttachments = selectedFiles;
+    this.oldAttachments = selectedFiles;
+  }
+
+  onAppendAttachmentsChange(addedAttachments) {
+    this.addedAttachments = addedAttachments;
   }
 
   addMarker(event: google.maps.MapMouseEvent) {
@@ -206,13 +227,51 @@ export class AddEditPitchComponent implements OnInit, OnDestroy, AfterViewInit {
     return this.addEditPitch?.get(key) as FormGroup;
   }
 
-  onAddPitch(form: FormGroup) {
+  OnRemoveAttachment(imageToRemove) {
+    const dialogData: ConfirmationDialog = {
+      title: `PITCH.DELETE_IMAGE`,
+      message: 'LABELS.FORM.ARE_YOU_SURE',
+      actionLabel: 'ACTIONS.DELETE',
+    };
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '550px',
+      minWidth: '500px',
+      data: dialogData,
+    });
+    return dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        const payload = {
+          imageUrl: imageToRemove.item,
+        };
+        this.pitchService
+          .deletePitchAttachment(this.pitchId, payload)
+          .subscribe((res) => {
+            if (res.deleted) {
+              this.toastrService.showToastr(res.message, ToastrTypes.success);
+              // this.pitchAttachments.splice(imageToRemove.index, 1);
+              this.oldAttachments.splice(imageToRemove.index, 1);
+              this.cdr.detectChanges();
+            }
+          });
+      } else {
+        return res;
+      }
+    });
+  }
+
+  onSubmitPitch(form: FormGroup) {
     const formData = new FormData();
-    for (let i = 0; i < this.pitchAttachments.length; i++) {
-      this.attachment = {};
-      const file = this.pitchAttachments[i];
-      formData.append('images', file, file.name);
-      this.attachment = formData;
+
+    if (this.addedAttachments.length > 0 && this.editMode) {
+      for (let i = 0; i < this.addedAttachments.length; i++) {
+        const file = this.addedAttachments[i];
+        formData.append('images', file, file.name);
+      }
+    } else if (!this.editMode) {
+      for (let i = 0; i < this.pitchAttachments.length; i++) {
+        const file = this.pitchAttachments[i];
+        formData.append('images', file, file.name);
+      }
     }
 
     formData.append('name', this.formControl('pitchDetails', 'name').value);

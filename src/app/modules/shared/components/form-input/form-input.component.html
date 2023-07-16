@@ -3,20 +3,20 @@
         <mat-form-field *ngSwitchCase="InputTypes.DATE_PICKER" class="form-input" appearance="fill">
             <mat-label class="form-input__label">{{ label | translate }}</mat-label>
 
-            <input matInput *ngIf="!isRangeDatePicker" [matDatepicker]="picker" [formControl]="formControl" />
+            <input matInput [matDatepicker]="picker" [formControl]="formControl" />
 
-            <mat-date-range-input *ngIf="isRangeDatePicker" [rangePicker]="rangePicker">
+            <!-- <mat-date-range-input *ngIf="isRangeDatePicker" [rangePicker]="rangePicker">
                 <input matStartDate placeholder="Start date" [formControl]="datePicker.start" />
                 <input matEndDate placeholder="End date" [formControl]="datePicker.end" />
-            </mat-date-range-input>
+            </mat-date-range-input> -->
 
-            <mat-datepicker-toggle *ngIf="!isRangeDatePicker" matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker-toggle *ngIf="isRangeDatePicker" matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <!-- <mat-datepicker-toggle *ngIf="isRangeDatePicker" matSuffix [for]="rangePicker"></mat-datepicker-toggle> -->
             <mat-date-range-picker #rangePicker></mat-date-range-picker>
             <mat-datepicker #picker></mat-datepicker>
 
             <mat-error>
-                <error-message [ctrl]="datePicker.start || datePicker.end">
+                <error-message [FormControl]="formControl" [isError]="isError" >
                 </error-message>
             </mat-error>
         </mat-form-field>
@@ -121,7 +121,7 @@
             </ng-container>
 
             <mat-error>
-                <error-message [ctrl]="formControl"></error-message>
+                <error-message [FormControl]="formControl" [isError]="isError" ></error-message>
             </mat-error>
 
             <span RtlDir *ngIf="iconClass" class="form-input__icon">{{'LABELS.SAR' | translate}}</span>

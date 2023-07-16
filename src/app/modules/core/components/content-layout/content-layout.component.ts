@@ -18,6 +18,18 @@ export class ContentLayoutComponent implements OnInit {
       iconClasses: 'fa fa-light fa-house fa-fw',
       route: '/pitches/',
     },
+    this.isHasRole(RoleType.Super_Admin) && {
+      id: 'ACCOUNT_MANAGEMET',
+      label: 'ACCOUNT.ACCOUNT_MANAGEMENT',
+      iconClasses: 'fa fa-solid fa-users fa-fw',
+      route: '/account/',
+    },
+    this.isHasRole(RoleType.Super_Admin) && {
+      id: 'RECOMMENDATION',
+      label: 'PITCH.RECOMMENDATIONS',
+      iconClasses: 'fa fa-regular fa-bookmark fa-fw',
+      route: '/recommendations/',
+    },
     // !this.isHasRole(RoleType.Tenant) && {
     //   id: 'PROPERTIES',
     //   label: 'LABELS.PROPERTIES',
@@ -54,13 +66,6 @@ export class ContentLayoutComponent implements OnInit {
     //   iconClasses: 'fa fa-solid fa-credit-card fa-fw',
     //   route: '/payments/',
     // },
-
-    this.isHasRole(RoleType.Super_Admin) && {
-      id: 'ACCOUNT_MANAGEMET',
-      label: 'ACCOUNT.ACCOUNT_MANAGEMENT',
-      iconClasses: 'fa fa-solid fa-users fa-fw',
-      route: '/account/',
-    },
   ];
   constructor(private translationService: TranslationService) {
     // translationService.setLanguage('en');

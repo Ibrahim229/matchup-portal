@@ -11,6 +11,21 @@ import { GoogleMapsModule } from '@angular/google-maps';
 import { PitchDetailsComponent } from './pages/pitch-details/pitch-details.component';
 import { PitchSchedulerComponent } from './pages/pitch-scheduler/pitch-scheduler.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import {
+  AgendaService,
+  DayService,
+  MonthAgendaService,
+  MonthService,
+  ScheduleModule,
+  TimelineMonthService,
+  TimelineViewsService,
+  WeekService,
+  WorkWeekService,
+} from '@syncfusion/ej2-angular-schedule';
+import { CalendarModule, DateTimePickerModule, TimePickerModule } from '@syncfusion/ej2-angular-calendars';
+import { PitchOpenTimeModalComponent } from './components/pitch-open-time-modal/pitch-open-time-modal.component';
+import { DatePipe } from '@angular/common';
+import { AddEditEventModalComponent } from './components/add-edit-event-modal/add-edit-event-modal.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +33,8 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     AddEditPitchComponent,
     PitchDetailsComponent,
     PitchSchedulerComponent,
+    PitchOpenTimeModalComponent,
+    AddEditEventModalComponent,
   ],
   imports: [
     CommonModule,
@@ -26,7 +43,22 @@ import { FullCalendarModule } from '@fullcalendar/angular';
     FullCalendarModule,
     PitchRoutingModule,
     GoogleMapsModule,
+    ScheduleModule,
+    DateTimePickerModule,
+    TimePickerModule,
+    CalendarModule,
     HttpClientModule,
+  ],
+  providers: [
+    DayService,
+    WeekService,
+    WorkWeekService,
+    MonthService,
+    AgendaService,
+    MonthAgendaService,
+    TimelineViewsService,
+    TimelineMonthService,
+    DatePipe
   ],
 })
 export class PitchModule {}

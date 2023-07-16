@@ -1,0 +1,33 @@
+<div class="add-recommendation" RtlDir>
+    <div class="add-recommendation__form">
+        <div *ngIf="!isLoadingRecommendations">
+            <h1 mat-dialog-title>{{'RECOMMENDATIONS.ADD_NEW_RECOMMENDATION'
+                |
+                translate}}</h1>
+            <div class="form-control-wrapper">
+                <form-input [label]="'RECOMMENDATIONS.SELECT_PITCH' | translate" [type]="InputTypes.SELECT"
+                    [selectOptions]="{
+list: recommendationsList,
+key: '_id',
+value: 'name'
+}" [FormControl]="selectedPitch">
+                </form-input>
+            </div>
+            <!-- (click)="onRegisterUser()" -->
+            <div class="add-recommendation__form__actions">
+                <button class="btn-fill" [disabled]="selectedPitch.invalid" (click)="onAddRecommendation()">
+                    {{ 'ACTIONS.CONFIRM' | translate }}
+                    <div *ngIf="isNewRecommendationSubmitting" class="spinner-border-sm text-success" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </button>
+                <button class="btn-outlined" (click)="onDismiss()">
+                    {{'ACTIONS.CANCEL' | translate}}
+                </button>
+            </div>
+        </div>
+        <div *ngIf="isLoadingRecommendations" class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</div>

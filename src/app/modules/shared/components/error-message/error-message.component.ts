@@ -1,89 +1,77 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormControl, ValidationErrors } from '@angular/forms';
+
+type ErrorParams = Record<string, string | number> | number;
+interface ErrorMessageReturn {
+  text: string;
+  variable?: string | number;
+}
 
 @Component({
   selector: 'error-message',
   templateUrl: './error-message.component.html',
   styleUrls: ['./error-message.component.scss'],
 })
-export class ErrorMessageComponent implements OnInit {
-  @Input() ctrl!: FormControl;
-  @Input() shouldShow = false;
+export class ErrorMessageComponent {
+  @Input() FormControl: FormControl;
+  @Input() isError: boolean;
 
-  // eslint-disable-next-line @typescript-eslint/ban-types
-  private static readonly errorMessages: Record<string, Function> = {
-    required: () => 'LABELS.FORM.VALIDATIONS.FIELD_IS_REQUIRED',
-    pattern: (params: { requiredPattern: string }) =>
-      ErrorMessageComponent.checkPatternMessage(params.requiredPattern),
-    email: () => 'LABELS.FORM.VALIDATIONS.REQUIRED_EMAIL',
-    notmatched: () => 'LABELS.FORM.VALIDATIONS.MIS_MATCH',
-    numbersOnly: () => 'LABELS.FORM.VALIDATIONS.NUMBERS_ONLY',
-    tenDigit: () => 'LABELS.FORM.VALIDATIONS.TEN_DIGITS_VALUE',
-  };
-  constructor() {}
-
-  ngOnInit() {}
-
-  shouldShowErrors(): boolean {
-    return !!(
-      (this.ctrl && this.ctrl.errors && this.ctrl.touched) ||
-      (this.ctrl && this.ctrl.errors && this.shouldShow)
+  get errors() {
+    return Object.entries(this.FormControl.errors ?? {}).reduce(
+      (errors, [errorKey, errorValue]: [string, ErrorParams]) => {
+        errors[errorKey] = this.errorMessages[errorKey]?.(errorValue);
+        return errors;
+      },
+      {} as ValidationErrors
     );
   }
 
-  listOfErrors(): string[] {
-    const errors: string[] = [];
-    if (this.ctrl.errors) {
-      for (const field of Object.keys(this.ctrl.errors)) {
-        if (field in ErrorMessageComponent.errorMessages) {
-          errors.push(
-            ErrorMessageComponent.errorMessages[field](this.ctrl.errors[field])
-          );
-        }
-      }
-    }
+  private errorMessages: Record<
+    string,
+    (params: ErrorParams) => ErrorMessageReturn
+  > = {
+    required: () => ({ text: 'INPUT_ERRORS.REQUIRED' }),
+    min: (params: { min: number }) => ({
+      text: 'INPUT_ERRORS.MIN',
+      variable: params.min,
+    }),
+    max: (params: { max: number }) => ({
+      text: 'INPUT_ERRORS.MAX',
+      variable: params.max,
+    }),
+    minLength: (params: { requiredLength: string }) => ({
+      text: 'INPUT_ERRORS.MIN_LENGTH',
+      variable: params.requiredLength,
+    }),
+    maxLength: (params: { requiredLength: string }) => ({
+      text: 'INPUT_ERRORS.MAX_LENGTH',
+      variable: params.requiredLength,
+    }),
+    email: () => ({ text: 'INPUT_ERRORS.EMAIL' }),
+    /*
+     * pattern */
+    pattern: ({ requiredPattern }: { requiredPattern: string }) =>
+      this.patternMessage(requiredPattern),
+    date: (params: { message: string }) => ({ text: params.message }),
 
-    return errors;
-  }
+    notmatched: () => ({ text: 'LABELS.FORM.VALIDATIONS.MIS_MATCH' }),
 
-  static checkPatternMessage(pattern: string) {
-    let validationMessage;
+    numbersOnly: () => ({ text: 'LABELS.FORM.VALIDATIONS.NUMBERS_ONLY' }),
+  };
 
+  private patternMessage(pattern: string): ErrorMessageReturn {
     switch (pattern) {
       case '^(([+][(]?[0-9]{1,3}[)]?)|([(]?[0-9]{3,4}[)]?))s*[)]?[-s.]?[(]?[0-9]{1,3}[)]?([-s.]?[0-9]{1,3})([-s.]?[0-9]{3,4})$':
-        validationMessage = 'Phone Number is Invalid';
-        break;
+        return { text: 'INPUT_ERRORS.PHONE_NUMBER' };
+
+      case '^[0-9]*$':
+        return { text: 'INPUT_ERRORS.DECIMAL_NUMBER' };
 
       case '^(0|[1-9][0-9]*)$':
-        validationMessage = 'This field value must be greater than 1';
-        break;
+        return { text: 'INPUT_ERRORS.GREATER_THAN_ONE' };
 
-      case '^[0-9a-zA-Z\\s]+$':
-        validationMessage =
-          'This field value must consist of English letters , numbers and  spaces';
-        break;
-      case '^[\u0621-\u064A0-9\\s]+$':
-        validationMessage =
-          'This field value must consist of Arabic letters, numbers and  spaces';
-        break;
-      case '^[a-zA-Z\\s]+$':
-        validationMessage =
-          'This field value must consist of English letters  and  spaces only ';
-        break;
-      case '^[\u0621-\u064A\\s]+$':
-        validationMessage =
-          'This field value must consist of Arabic letters  and  spaces only';
-        break;
-      case '^[0-9]{10}$':
-        validationMessage = 'This field value must be 10 Numbers';
-        break;
-      case '^[0-9]*$':
-        validationMessage = 'This field accept numbers only';
-        break;
       default:
-        validationMessage = 'The required pattern is: ' + pattern;
-        break;
+        return { text: `INPUT_ERRORS.DEFAULT_PATTERN`, variable: pattern };
     }
-    return validationMessage;
   }
 }

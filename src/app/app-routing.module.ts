@@ -26,17 +26,21 @@ const routes: Routes = [
           ),
         canLoad: [RolesGuard],
         data: {
-          pre: [RoleType.Super_Admin, RoleType.Admin],
+          pre: [RoleType.Admin],
         },
       },
-      // {
-      //   path: 'contracts',
-      //   canActivate: [AuthGuard],
-      //   loadChildren: () =>
-      //     import('./modules/feature/contracts/contracts.module').then(
-      //       (m) => m.ContractsModule
-      //     ),
-      // },
+      {
+        path: 'recommendations',
+        canActivate: [AuthGuard],
+        loadChildren: () =>
+          import('./modules/feature/recommendation/recommendation.module').then(
+            (m) => m.RecommendationModule
+          ),
+        canLoad: [RolesGuard],
+        data: {
+          pre: [RoleType.Super_Admin],
+        },
+      },
     ],
   },
 ];

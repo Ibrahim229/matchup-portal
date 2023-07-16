@@ -15,7 +15,7 @@
         <mat-datepicker #dpicker></mat-datepicker>
 
         <mat-error>
-            <error-message [ctrl]="datePicker.start || datePicker.end">
+            <error-message [FormControl]="datePicker.start || datePicker.end">
             </error-message>
         </mat-error>
     </mat-form-field>

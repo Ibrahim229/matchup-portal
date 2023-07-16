@@ -90,7 +90,8 @@
     "EDIT_USER": "تعديل البيانات",
     "PRINT": "طباعة",
     "PAYMENT": "دفع",
-    "OK": "موافق"
+    "OK": "موافق",
+    "EDIT_WORKING_HOURS": "تعديل مواعيد العمل"
   },
   "PITCH": {
     "PITCHES_MANAGEMENT": "إدارة الملاعب",
@@ -109,6 +110,28 @@
     "ADD_PITCH_IMAGES": "اضافة صور الملعب ",
     "DELETE_PITCH": "حذف ملعب",
     "PITCH_LOCATION": "مكان الملعب",
-    "VIEW_SCHEDULER": "عرض المواعيد"
+    "VIEW_SCHEDULER": "عرض المواعيد",
+    "DELETE_IMAGE": "حذف صورة",
+    "WORK_START": "بداية العمل",
+    "WORK_END": "نهاية العمل",
+    "RECOMMENDATIONS":"التوصيات"
+  },
+  "RECOMMENDATIONS":{
+    "ADD_NEW_RECOMMENDATION":"اضافة توصية جديدة",
+    "SELECT_PITCH":"اسم الملعب",
+    "DELETE_RECOMMENDATION":"حذف توصية"
+
+  },
+  "INPUT_ERRORS": {
+    "REQUIRED": "هذا البيان اجباري.",
+    "MIN": " قيمة البيان لابد ان تكون اكبر من او تساوي {{ label }}.",
+    "MAX": "قيمة البيان لابد ان تكون اقل من او تساوي {{ label }}.",
+    "MIN_LENGTH": "قيمة البيان لابد ان تكون علي الاقل {{ label }}.",
+    "MAX_LENGTH": "قيمة البيان لابد ان تكون علي الاكثر {{ label }} .",
+    "EMAIL": "من فضلك ادخل بريد الالكتروني صالح.",
+    "PHONE_NUMBER": "رقم الهاتف غير صحيح",
+    "DECIMAL_NUMBER": "This field must not contain a decimals",
+    "DEFAULT_PATTERN": "القيمة المطلوبة: {{ label }}",
+    "GREATER_THAN_ONE": "قيمة الحقل لابد ان تكون اكبر من 1"
   }
 }

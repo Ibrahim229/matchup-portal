@@ -1,0 +1,51 @@
+@import "abstracts/variables";
+
+.work-hours {
+  &__form {
+    h1 {
+      font-size: 20px;
+      margin-bottom: 25px;
+    }
+    &__result {
+      text-align: center;
+      h6 {
+        margin-bottom: 10px;
+        font-weight: bold;
+        &:first-of-type {
+          color: $green-900;
+        }
+      }
+      p {
+        background-color: $grey;
+        padding: 20px 0;
+        border-radius: 5px;
+        outline: 1px dashed $green-900;
+        font-size: 17px;
+        margin: 15px 0;
+      }
+    }
+
+    .time__wrapper {
+      .picker-wrapper{
+        margin-bottom: 10px;
+      }
+    }
+    &__actions {
+      margin-top: 25px;
+      display: flex;
+      gap: 10px;
+    }
+  }
+  &.rtl {
+    .work-hours__form {
+      font-family: "Cairo", sans-serif !important;
+      h1 {
+        font-family: "Cairo", sans-serif !important;
+        text-align: end;
+      }
+      &__actions {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+}

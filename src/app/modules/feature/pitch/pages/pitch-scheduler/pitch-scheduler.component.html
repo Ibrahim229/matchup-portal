@@ -1,8 +1,86 @@
-<div class="calendar-wrapper">
-    <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'>
-        <ng-template #eventContent let-arg>
-            <b>{{ arg.timeText }}</b>
-            <i>{{ arg.event.title }}</i>
+<div class="calendar-wrapper" RtlDir>
+  <ejs-schedule #scheduler [eventSettings]='eventSettings' [views]="views" [workHours]="workHours"
+    [currentView]="currentView" [startHour]="startHour" [endHour]="endHour" (eventRendered)="onEventRendered($event)"
+    (renderCell)="onRenderCell($event)" [showQuickInfo]="false" (popupOpen)="onPopupOpen($event)"
+    (popupClose)="onPopupClose($event)" (actionComplete)="onActionBegin($event)" (actionBegin)="onActionBegin($event)"
+    [ngClass]="{'isRtl': currentLang === Lang.arabic}">
+
+    <e-views *ngIf="!isLoadingData">
+      <e-view option="Day">
+        <ng-template #eventTemplate let-data>
+          <div class='template-wrap' [style.background]="data.categoryColor">
+            <div class="subject" [style.background]="data.categoryColor">{{data.eventName}}</div>
+            <div class="time" [style.background]="data.categoryColor">Time: {{data.startTime | date:'hh:mm a'}}
+              -
+              {{data.endTime | date:'hh:mm a'}}</div>
+            <div class="description" *ngIf="data.fromMobile">Name : {{data.fullName}}</div>
+            <div class="description" *ngIf="data.fromMobile">Phone Number : {{data.phoneNumber}}</div>
+          </div>
         </ng-template>
-    </full-calendar>
+      </e-view>
+
+      <e-view option="Week">
+        <ng-template #eventTemplate let-data>
+          <!-- Reuse the same template for Month view -->
+          <ng-container *ngTemplateOutlet="eventTemplate; context: { $implicit: data }"></ng-container>
+        </ng-template>
+      </e-view>
+      <e-view option="Month">
+        <ng-template #eventTemplate let-data>
+          <!-- Reuse the same template for Month view -->
+          <ng-container *ngTemplateOutlet="eventTemplate; context: { $implicit: data }"></ng-container>
+        </ng-template>
+      </e-view>
+    </e-views>
+
+    <ng-template #editorTemplate let-data>
+      <table *ngIf="data != undefined" class="custom-event-editor" width="100%" cellpadding="5">
+        <tbody>
+          <tr>
+            <td class="e-textlabel">Title</td>
+            <td colspan="4">
+              <input id="title" class="e-field e-input" type="text" value="{{data.eventName}}" name="Subject"
+                style="width: 100%" [disabled]="editMode" />
+            </td>
+          </tr>
+          <tr>
+            <td class="e-textlabel">From</td>
+            <td colspan="4">
+              <ejs-datetimepicker id="StartTime" class="e-field" data-name="StartTime" format="M/dd/yy h:mm a"
+                (change)="onDateChange($event)" [value]="startDateParser(data.startTime || data.StartTime)" [step]="60"
+                [enabled]="!editMode">
+              </ejs-datetimepicker>
+            </td>
+          </tr>
+          <tr>
+            <td class="e-textlabel">To</td>
+            <td colspan="4">
+              <ejs-datetimepicker id="EndTime" class="e-field" data-name="EndTime" format="M/dd/yy h:mm a"
+                (change)="onDateChange($event)" [value]="endDateParser(data.endTime || data.EndTime)" [step]="60"
+                [enabled]="!editMode">
+              </ejs-datetimepicker>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+
+    <ng-template #eventContent let-data="data">
+      {{data | json }}
+      <div class="e-event-content" style="padding:10px">
+        <div class="subject" style="padding-bottom:10px">Subject: {{data.Subject}}</div>
+        <div class="start-time" style="padding-bottom:10px">Start: {{data.StartTime.toLocaleString()}}</div>
+        <div class="end-time" style="padding-bottom:10px">End: {{data.EndTime.toLocaleString()}}</div>
+        <div class="location" style="padding-bottom:10px">Location: {{data.Location}}</div>
+        <div class="description" style="padding-bottom:10px">Description: {{data.Description}}</div>
+      </div>
+    </ng-template>
+
+  </ejs-schedule>
+</div>
+
+<div class="loader" *ngIf="isLoadingData">
+  <div class="spinner-border text-success" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
 </div>

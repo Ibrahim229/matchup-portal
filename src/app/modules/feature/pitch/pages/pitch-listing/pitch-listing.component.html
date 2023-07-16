@@ -1,4 +1,4 @@
-<div class="page-container property-listing">
+<div class="page-container">
     <div class="page-header">
         <h4>{{'PITCH.PITCHES' | translate }}</h4>
         <div class="btn-wrapper">
@@ -32,6 +32,9 @@
                                 <i class="fa-solid fa-ellipsis"></i>
                             </button>
                             <mat-menu #menu="matMenu" RtlDir>
+                                <button mat-menu-item RtlDir
+                                    (click)="handleUpdateWorkingHours(row)">{{'ACTIONS.EDIT_WORKING_HOURS' |
+                                    translate}}</button>
                                 <button mat-menu-item RtlDir
                                     [routerLink]="['/pitches/scheduler', row?._id]">{{'PITCH.VIEW_SCHEDULER' |
                                     translate}}</button>

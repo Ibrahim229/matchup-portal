@@ -1,0 +1,45 @@
+<div class="page-container contracts-listing">
+    <div class="page-header">
+        <h4>
+            {{ 'PITCH.RECOMMENDATIONS' | translate }}
+        </h4>
+        <div class="btn-wrapper">
+            <!-- (click)="handleRegisterUser()"  -->
+            <button class="ac-btn btn-fill" *ngIf="isHasRole(RoleType.Super_Admin)" (click)="handleAddRecommendation()">
+                {{'RECOMMENDATIONS.ADD_NEW_RECOMMENDATION' | translate }}
+            </button>
+        </div>
+    </div>
+    <div class="page-content">
+        <section class="table-wrapper">
+            <data-table class="preview__table" [pagination]="false" [dataSource]="(recommendationsTable$ | async)!"
+                *ngIf="recommendationsTable$">
+                <ng-template #tableHead>
+                    <tr>
+                        <th>{{'PITCH.PITCH_NAME' | translate}}</th>
+                        <th *ngIf="isHasRole(RoleType.Super_Admin)">{{'ACTIONS.ACTIONS' | translate}}</th>
+                    </tr>
+                </ng-template>
+                <ng-template #tableRows let-row>
+                    <tr>
+                        <td>
+                            {{row?.pitch.name}}
+                        </td>
+                        <td RtlDir *ngIf="isHasRole(RoleType.Super_Admin)">
+                            <button mat-button [matMenuTriggerFor]="menu">
+                                <i class="fa-solid fa-ellipsis"></i>
+                            </button>
+                            <mat-menu #menu="matMenu" RtlDir>
+                                <button mat-menu-item RtlDir
+                                    (click)="handleRemoveRecommendation(row?.pitch._id)">{{'ACTIONS.DELETE' |
+                                    translate}}</button>
+                            </mat-menu>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template #loaderRef></ng-template>
+            </data-table>
+        </section>
+    </div>
+</div>

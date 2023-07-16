@@ -1,6 +1,6 @@
 <div class="add-edit-page" RtlDir>
     <div class="content-container">
-        <form [formGroup]="addEditPitch" autocomplete="off" (ngSubmit)="onAddPitch(addEditPitch)">
+        <form [formGroup]="addEditPitch" autocomplete="off" (ngSubmit)="onSubmitPitch(addEditPitch)">
             <mat-stepper class="form-stepper" [orientation]="(stepperOrientation | async)!"
                 (selectionChange)="onSelection($event)" [selectedIndex]="selectedIndex" RtlDir>
                 <mat-step [label]="'PITCH.PITCH_DETAILS' | translate" [stepControl]="formGroup('pitchDetails')">
@@ -20,7 +20,7 @@
                                     </form-input>
                                 </div>
                                 <div class="form-control-wrapper">
-                                    <form-input [label]="'PITCH.PITCH_PRICE'" [type]="InputTypes.TEXT"
+                                    <form-input [label]="'PITCH.PITCH_PRICE'" [type]="InputTypes.NUMBER"
                                         [FormControl]="formControl('pitchDetails','price')">
                                     </form-input>
                                 </div>
@@ -41,8 +41,8 @@
                                     </div>
                                 </div>
                                 <div class="form-control-wrapper">
-                                    <form-input [label]="'PITCH.PLAYERS_NUMBER'" [type]="InputTypes.TEXT"
-                                        [FormControl]="formControl('pitchDetails','playersNumber')">
+                                    <form-input [label]="'PITCH.PLAYERS_NUMBER'" [type]="InputTypes.NUMBER"
+                                        [FormControl]="formControl('pitchDetails','playersNumber')" [max]="11">
                                     </form-input>
                                 </div>
                                 <div class="form-control-wrapper">
@@ -65,9 +65,10 @@
                         <div class="form-control-wrapper mt-5">
                             <upload-file label="PITCH.ADD_PITCH_IMAGES" [singleFile]="false" [editMode]="editMode"
                                 [formControl]="formControl('attachments','images')" [oldAttachments]="oldAttachments"
-                                [allowedTypes]="allowedTypes" (onAttachmentChange)="onAttachmentsChange($event)"
-                                canAccept="application/pdf,image/png,image/jpeg,image/tiff
-                    ">
+                                [allowedTypes]="allowedTypes" (onAppendAttachments)="onAppendAttachmentsChange($event)"
+                                (onAttachmentChange)="onAttachmentsChange($event)"
+                                canAccept="image/png,image/jpeg,image/tiff"
+                                (onRemoveAttachment)="OnRemoveAttachment($event)">
                             </upload-file>
                         </div>
                     </div>

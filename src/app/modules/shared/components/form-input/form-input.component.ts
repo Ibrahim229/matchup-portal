@@ -39,7 +39,8 @@ export class FormInputComponent implements OnInit {
   @Input() label!: string;
   @Input() type: InputTypes = InputTypes.TEXT;
   @Input() placeholder?: string;
-  @Input() FormControl!: FormControl | RangeDatePicker;
+  @Input() max: number;
+  @Input() FormControl!: FormControl;
   @Input() selectOptions?: SelectOptions;
   @Input() radioOptions?: RadioOption[];
   @Input() iconClass?: boolean = false;
@@ -65,11 +66,11 @@ export class FormInputComponent implements OnInit {
     this.setInitialFilteredListValue();
     this.filterListChangeEvent();
 
-    this.subs.add = merge(
-      this.formControl?.valueChanges || of(),
-      this.datePicker?.start?.valueChanges || of(),
-      this.datePicker?.end?.valueChanges || of()
-    )?.subscribe((value) => this.valueChanges.emit(value));
+    // this.subs.add = merge(
+    //   this.formControl?.valueChanges || of(),
+    //   this.datePicker?.start?.valueChanges || of(),
+    //   this.datePicker?.end?.valueChanges || of()
+    // )?.subscribe((value) => this.valueChanges.emit(value));
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -91,12 +92,8 @@ export class FormInputComponent implements OnInit {
     return this.FormControl as FormControl;
   }
 
-  get datePicker() {
-    return this.FormControl as RangeDatePicker;
-  }
-
-  get isRangeDatePicker() {
-    return (this.FormControl as RangeDatePicker).start ? true : false;
+  get isError() {
+      return this.FormControl && this.FormControl.errors && this.FormControl.touched
   }
 
   get selectOptionsList$() {

@@ -28,7 +28,7 @@ export class PitchService {
     );
   }
 
-  editPitch(pitchId: string,payload: any) {
+  editPitch(pitchId: string, payload: any) {
     return this.xhrService.call(
       {
         url: `pitch/${pitchId}`,
@@ -43,6 +43,46 @@ export class PitchService {
     return this.xhrService.call({
       url: `pitch/${pitchId}`,
       method: Method.delete,
+      body: {},
+    });
+  }
+
+  deletePitchAttachment(pitchId: string, payload) {
+    return this.xhrService.call({
+      url: `pitch/deletePitchImage/${pitchId}`,
+      method: Method.delete,
+      body: payload,
+    });
+  }
+
+  getPitchEvents(pitchId: string) {
+    return this.xhrService.call({
+      url: `admin/event/${pitchId}`,
+      method: Method.get,
+      body: {},
+    });
+  }
+
+  createEvent(pitchId: string, payload: any) {
+    return this.xhrService.call({
+      url: `admin/event/createEvent/${pitchId}`,
+      method: Method.post,
+      body: payload,
+    });
+  }
+
+  updateWorkingHours(pitchId: string, payload: any) {
+    return this.xhrService.call({
+      url: `pitch/updateCloseTime/${pitchId}`,
+      method: Method.put,
+      body: payload,
+    });
+  }
+
+  cancelEvent(eventId: string) {
+    return this.xhrService.call({
+      url: `admin/event/cancelEvent/${eventId}`,
+      method: Method.get,
       body: {},
     });
   }

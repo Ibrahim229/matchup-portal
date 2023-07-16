@@ -7,8 +7,6 @@ import { AccountLayoutComponent } from './components/account-layout/account-layo
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { MaterialModule } from '../../shared/material/material.module';
 import { UsersListingComponent } from './pages/users-listing/users-listing.component';
-import { CalendarModule, DateAdapter } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { RegisterUserModalComponent } from './components/register-user-modal/register-user-modal.component';
 
 @NgModule({
@@ -19,15 +17,6 @@ import { RegisterUserModalComponent } from './components/register-user-modal/reg
     UsersListingComponent,
     RegisterUserModalComponent,
   ],
-  imports: [
-    CommonModule,
-    AccountRoutingModule,
-    SharedModule,
-    MaterialModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
-  ],
+  imports: [CommonModule, AccountRoutingModule, SharedModule, MaterialModule],
 })
 export class AccountModule {}

@@ -1,0 +1,36 @@
+<div class="work-hours" RtlDir>
+    <div class="work-hours__form">
+        <h1 mat-dialog-title>{{'ACTIONS.EDIT_WORKING_HOURS'
+            |
+            translate}}</h1>
+
+        <div class="time__wrapper">
+            <div class="picker-wrapper">
+                <ejs-timepicker #startTime id='startTime' [step]="60" [value]="FormControl('openT').value"
+                    [formControl]="FormControl('openT')" (change)='onEnableEndTime($event)' [placeholder]="'PITCH.WORK_START'
+                    |
+                    translate" floatLabelType="Always"></ejs-timepicker>
+            </div>
+            <div class="picker-wrapper">
+
+                <ejs-timepicker #endTime id='endTime' [step]="60" [formControl]="FormControl('closeT')" [placeholder]="'PITCH.WORK_END'
+                |
+                translate" floatLabelType="Always" [enabled]='false'></ejs-timepicker>
+                <!-- {{endObject?.value | json}} -->
+            </div>
+        </div>
+
+        <div class="work-hours__form__actions">
+            <button class="btn-fill" [disabled]="workhours.invalid" (click)="onUpdateTime()">
+                {{ 'ACTIONS.SAVE' | translate }}
+                <div class="mx-2 spinner-border text-success" role="status" *ngIf="isUpdateTimeSubmitting">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </button>
+            <button class="btn-outlined" (click)="onDismiss()">
+                {{'ACTIONS.CANCEL' | translate}}
+            </button>
+
+        </div>
+    </div>
+</div>

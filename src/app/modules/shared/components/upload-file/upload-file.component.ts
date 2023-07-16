@@ -1,4 +1,4 @@
-  import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import {
   Component,
   OnInit,
@@ -41,6 +41,8 @@ export class UploadFileComponent implements OnInit {
   errorType = '';
   @Input('formGroup') formGroup!: FormGroup;
   @Input('formControl') formControl!: FormControl;
+  addedAttachments: any[] = [];
+  @Output() onAppendAttachments: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 
@@ -129,13 +131,23 @@ export class UploadFileComponent implements OnInit {
         this.selectedFiles = event;
       } else {
         if (event.target.files.length > 0) {
-          this.selectedFiles = [];
-          Array.from(event.target.files).forEach((file: any) => {
-            this.selectedFiles.push(file);
-          });
+          if (this.oldAttachments.length > 0) {
+            Array.from(event.target.files).forEach((file: any) => {
+              this.addedAttachments.push(file);
+            });
+            this.selectedFiles = this.selectedFiles.concat(
+              this.addedAttachments
+            );
+          } else {
+            this.selectedFiles = [];
+            Array.from(event.target.files).forEach((file: any) => {
+              this.selectedFiles.push(file);
+            });
+          }
         }
       }
     }
+    this.onAppendAttachments.emit(this.addedAttachments);
     this.onAttachmentChange.emit(this.selectedFiles);
     this.formControl?.markAsTouched();
     this.formControl?.markAsDirty();
@@ -147,23 +159,38 @@ export class UploadFileComponent implements OnInit {
   }
 
   handleRemoveFile(index: number) {
-    if (this.singleFile) {
-      this.fileDropRef.nativeElement.value = '';
-      this.fileUrl = '';
+    const itemToDelete = this.selectedFiles[index];
+    if (itemToDelete.name) {
+      this.selectedFiles.splice(index, 1);
+      const addedIndex = this.addedAttachments.findIndex(
+        (attachment) => attachment.name === itemToDelete.name
+      );
+      this.addedAttachments.splice(addedIndex, 1);
+      this.onAppendAttachments.emit(this.addedAttachments);
     } else {
-      if (this.selectedFiles[index].id) {
-        this.onRemoveAttachment.emit({
-          index: index,
-          attachmentId: this.selectedFiles[index]?.id,
-        });
-      } else {
-        const fileListArr = Array.from(this.selectedFiles);
-        fileListArr.splice(index, 1);
-        this.selectedFiles = fileListArr;
-        this.onAttachmentChange.emit(this.selectedFiles);
-      }
+      this.onRemoveAttachment.emit({ index: index, item: itemToDelete });
     }
-    !this.selectedFiles.length && this.formControl?.reset();
+    this.onAttachmentChange.emit(this.selectedFiles);
+
+    // this.onAttachmentChange.emit(this.selectedFiles);
+
+    // if (this.singleFile) {
+    //   this.fileDropRef.nativeElement.value = '';
+    //   this.fileUrl = '';
+    // } else {
+    //   if (this.selectedFiles[index].id) {
+    //     this.onRemoveAttachment.emit({
+    //       index: index,
+    //       attachmentId: this.selectedFiles[index]?.id,
+    //     });
+    //   } else {
+    //     const fileListArr = Array.from(this.selectedFiles);
+    //     fileListArr.splice(index, 1);
+    //     this.selectedFiles = fileListArr;
+    //     this.onAttachmentChange.emit(this.selectedFiles);
+    //   }
+    // }
+    // !this.selectedFiles.length && this.formControl?.reset();
     this.formControl?.markAsTouched();
     this.formControl?.markAsDirty();
   }

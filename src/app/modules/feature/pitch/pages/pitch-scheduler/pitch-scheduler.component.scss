@@ -1,6 +1,55 @@
+@import "abstracts/variables";
+
 .calendar-wrapper {
   background-color: #fff;
   padding: 24px 25px;
   margin: 24px;
   border-radius: 5px;
+}
+
+// ::ng-deep.e-schedule .e-work-cells.e-disable-dates {
+//   cursor: not-allowed;
+//   pointer-events: none;
+// }
+
+::ng-deep.e-quick-popup-wrapper .e-popup-footer .e-event-details {
+  display: none !important;
+}
+// ::ng-deep.e-quick-popup-wrapper .e-cell-popup .e-popup-footer .e-event-create {
+//   display: none;
+// }
+
+::ng-deep {
+  .e-timeline-week,
+  .e-toolbar-item.e-today {
+    display: none !important;
+  }
+  .e-btn.e-flat.e-primary,
+  .e-css.e-btn.e-flat.e-primary {
+    color: $green-900;
+    &:focus,
+    &:hover {
+      color: $green-900;
+      background: #0792471f;
+    }
+  }
+  .e-schedule-dialog.e-event-delete {
+    color: $red;
+    &:focus,
+    &:hover {
+      color: $red-900;
+    }
+  }
+}
+
+.loader {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+::ng-deep.isRtl.e-schedule .e-toolbar .e-toolbar-items.e-tbar-pos .e-toolbar-left {
+  display: flex;
+  flex-direction: row-reverse !important;
 }

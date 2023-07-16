@@ -146,7 +146,7 @@ export class XhrService {
               // The response body may contain clues as to what went wrong,
               if (error.status === 400) {
                 this.toastrService.showToastr(
-                  error.error?.message ? error.error.message : error.error,
+                  error.error.message ? error.error.message.message : error.error,
                   ToastrTypes.error
                 );
               } else if (error.status === 401) {

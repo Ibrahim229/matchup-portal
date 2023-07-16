@@ -89,7 +89,8 @@
     "EDIT_USER": "Edit User",
     "PRINT": "Print",
     "PAYMENT": "Payment",
-    "OK": "Ok"
+    "OK": "Ok",
+    "EDIT_WORKING_HOURS": "Edit Working Hours"
   },
   "PITCH": {
     "PITCHES_MANAGEMENT": "Pitches Management",
@@ -108,6 +109,27 @@
     "ADD_PITCH_IMAGES": "Add Pitch Images",
     "DELETE_PITCH": "Delete Pitch",
     "PITCH_LOCATION": "Pitch Location",
-    "VIEW_SCHEDULER": "View Scheduler"
+    "VIEW_SCHEDULER": "View Scheduler",
+    "DELETE_IMAGE": "Delete Image",
+    "WORK_START": "Work Start",
+    "WORK_END": "Work End",
+    "RECOMMENDATIONS":"Recommendations"
+  },
+  "RECOMMENDATIONS":{
+    "ADD_NEW_RECOMMENDATION":"Add New Recommendation",
+    "SELECT_PITCH":"Select Pitch",
+    "DELETE_RECOMMENDATION":"Delete Recommendation"
+  },
+  "INPUT_ERRORS": {
+    "REQUIRED": "This field is required.",
+    "MIN": "Value must be more than or equal {{ label }}.",
+    "MAX": "value must be less than or equal {{ label }}.",
+    "MIN_LENGTH": "Value must be at least {{ label }} characters long.",
+    "MAX_LENGTH": "Value must be shorter than {{ label }} characters.",
+    "EMAIL": "Please Enter a vaild mail.",
+    "PHONE_NUMBER": "Phone Number is Invalid",
+    "DECIMAL_NUMBER": "This field must not contain a decimals",
+    "DEFAULT_PATTERN": "The required pattern is: {{ label }}",
+    "GREATER_THAN_ONE": "This field value must be greater than 1"
   }
 }

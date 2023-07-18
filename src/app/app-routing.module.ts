@@ -4,6 +4,7 @@ import { ContentLayoutComponent } from './modules/core/components/content-layout
 import { AuthGuard } from './modules/core/guards/auth.guard';
 import { RolesGuard } from './modules/core/guards/roles.guard';
 import { RoleType } from './modules/core/enums/role.enum';
+import { HomeGuard } from './modules/core/guards/home.guard';
 
 const routes: Routes = [
   {
@@ -41,6 +42,7 @@ const routes: Routes = [
           pre: [RoleType.Super_Admin],
         },
       },
+      { path: '**', redirectTo: '/' },
     ],
   },
 ];

@@ -20,6 +20,7 @@ import { TranslationService } from './services/translation/translation.service';
 import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from '../shared/shared.module';
 import { RolesGuard } from './guards/roles.guard';
+import { HomeGuard } from './guards/home.guard';
 
 @NgModule({
   declarations: [
@@ -43,8 +44,8 @@ import { RolesGuard } from './guards/roles.guard';
       },
     }),
   ],
-  exports: [DynamicLoaderComponent, ContentLayoutComponent,TranslateModule],
-  providers: [RolesGuard,TranslationService],
+  exports: [DynamicLoaderComponent, ContentLayoutComponent, TranslateModule],
+  providers: [RolesGuard, TranslationService, HomeGuard],
 })
 export class CoreModule {}
 

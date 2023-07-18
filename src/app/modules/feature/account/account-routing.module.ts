@@ -5,6 +5,8 @@ import { AccountLayoutComponent } from './components/account-layout/account-layo
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UsersListingComponent } from './pages/users-listing/users-listing.component';
+import { HomeGuard } from '../../core/guards/home.guard';
+import { AuthGuard } from '../../core/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -14,8 +16,8 @@ const routes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: '/login',
-        title: 'MatchUp',
+        component: LoginComponent,
+        canActivate: [HomeGuard],
       },
       {
         path: 'login',
@@ -24,6 +26,7 @@ const routes: Routes = [
       {
         path: 'forgot-password',
         component: ForgotPasswordComponent,
+        canActivate: [AuthGuard],
       },
     ],
   },
@@ -35,11 +38,13 @@ const routes: Routes = [
         title: 'Users',
         path: '',
         component: UsersListingComponent,
+        canActivate: [AuthGuard],
       },
       {
         title: 'Change Password',
         path: 'change-password',
         component: ForgotPasswordComponent,
+        canActivate: [AuthGuard],
       },
     ],
   },

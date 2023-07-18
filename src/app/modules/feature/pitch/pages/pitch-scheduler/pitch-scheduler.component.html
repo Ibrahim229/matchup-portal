@@ -1,20 +1,24 @@
 <div class="calendar-wrapper" RtlDir>
   <ejs-schedule #scheduler [eventSettings]='eventSettings' [views]="views" [workHours]="workHours"
-    [currentView]="currentView" [startHour]="startHour" [endHour]="endHour" (eventRendered)="onEventRendered($event)"
-    (renderCell)="onRenderCell($event)" [showQuickInfo]="false" (popupOpen)="onPopupOpen($event)"
-    (popupClose)="onPopupClose($event)" (actionComplete)="onActionBegin($event)" (actionBegin)="onActionBegin($event)"
-    [ngClass]="{'isRtl': currentLang === Lang.arabic}">
+    [currentView]="currentView" (eventRendered)="onEventRendered($event)" (renderCell)="onRenderCell($event)"
+    (popupOpen)="onPopupOpen($event)" (popupClose)="onPopupClose($event)" (actionComplete)="onActionBegin($event)"
+    (actionBegin)="onActionBegin($event)" [ngClass]="{'isRtl': currentLang === Lang.arabic}"
+    [quickInfoOnSelectionEnd]="true">
 
-    <e-views *ngIf="!isLoadingData">
+    <e-views>
       <e-view option="Day">
         <ng-template #eventTemplate let-data>
           <div class='template-wrap' [style.background]="data.categoryColor">
-            <div class="subject" [style.background]="data.categoryColor">{{data.eventName}}</div>
-            <div class="time" [style.background]="data.categoryColor">Time: {{data.startTime | date:'hh:mm a'}}
-              -
-              {{data.endTime | date:'hh:mm a'}}</div>
-            <div class="description" *ngIf="data.fromMobile">Name : {{data.fullName}}</div>
-            <div class="description" *ngIf="data.fromMobile">Phone Number : {{data.phoneNumber}}</div>
+            <div>
+              <div class="subject" [style.background]="data.categoryColor">{{data.eventName}}</div>
+              <div class="time" [style.background]="data.categoryColor">Time: {{data.startTime | date:'hh:mm a'}}
+                -
+                {{data.endTime | date:'hh:mm a'}}</div>
+            </div>
+            <div>
+              <div class="description" *ngIf="data.fromMobile">Name : {{data.fullName}}</div>
+              <div class="description" *ngIf="data.fromMobile">Phone Number : {{data.phoneNumber}}</div>
+            </div>
           </div>
         </ng-template>
       </e-view>
@@ -79,8 +83,8 @@
   </ejs-schedule>
 </div>
 
-<div class="loader" *ngIf="isLoadingData">
+<!-- <div class="loader" *ngIf="isLoadingData">
   <div class="spinner-border text-success" role="status">
     <span class="visually-hidden">Loading...</span>
   </div>
-</div>
+</div> -->

@@ -14,7 +14,7 @@ import { ToastrTypes } from 'src/app/modules/shared/enums/toastrTypes';
   templateUrl: './pitch-open-time-modal.component.html',
   styleUrls: ['./pitch-open-time-modal.component.scss'],
 })
-export class PitchOpenTimeModalComponent implements AfterViewInit {
+export class PitchOpenTimeModalComponent {
   @ViewChild('startTime')
   public startObject: TimePickerComponent;
   @ViewChild('endTime')
@@ -45,24 +45,10 @@ export class PitchOpenTimeModalComponent implements AfterViewInit {
     this.workhours.updateValueAndValidity();
   }
 
-  ngAfterViewInit(): void {
-    this.endInput = <HTMLInputElement>document.getElementById('endTime');
-    if (!this.FormControl('openT').value) {
-      this.startObject.value = new Date(this.pitchDetails.openTime);
-      this.endObject.enabled = false;
-    } else {
-      let startObjValue = new Date(this.FormControl('openT').value);
-      startObjValue.setMinutes(
-        startObjValue.getMinutes() + this.endObject.step
-      );
-      this.endObject.min = startObjValue;
-    }
-  }
-
   onUpdateTime() {
     const payload = {
-      openT: new Date(this.workhours.value.openT).toUTCString(),
-      closeT: new Date(this.workhours.value.closeT).toUTCString(),
+      openT: new Date(this.workhours.value.openT),
+      closeT: new Date(this.workhours.value.closeT),
     };
 
     this.isUpdateTimeSubmitting = true;
@@ -77,21 +63,6 @@ export class PitchOpenTimeModalComponent implements AfterViewInit {
         this.isUpdateTimeSubmitting = false;
       });
   }
-
-  public onEnableEndTime(args: ChangeEventArgs): void {
-    let value: Date;
-    if (this.isStartTimeChange) {
-      this.endObject.enabled = true;
-      this.endObject.value = null;
-      this.endInput.value = '';
-      value = new Date(args.value);
-      value.setMinutes(value.getMinutes() + this.endObject.step);
-      this.endObject.min = value;
-    } else {
-      this.isStartTimeChange = true;
-    }
-  }
-
   onDismiss() {
     this.dialogRef.close(true);
   }

@@ -18,6 +18,9 @@ import {
   RenderCellEventArgs,
   PopupOpenEventArgs,
   ActionEventArgs,
+  CellClickEventArgs,
+  CurrentAction,
+  EJ2Instance,
 } from '@syncfusion/ej2-angular-schedule';
 import { Subscriptions } from 'src/app/modules/shared/utils/subscriptions';
 import { ActivatedRoute } from '@angular/router';
@@ -170,8 +173,8 @@ export class PitchSchedulerComponent
 
       if (
         !this.scheduler.isSlotAvailable(
-          eventData?.StartTime,
-          eventData?.EndTime
+          eventData?.StartTime ? eventData?.StartTime : eventData?.startTime,
+          eventData?.EndTime ? eventData?.EndTime : eventData?.endTime
         )
       ) {
         // Here the isSlotAvailable public method used to check for the availability of the mentioned time slot
@@ -180,9 +183,15 @@ export class PitchSchedulerComponent
       } else {
         if (args?.addedRecords?.length) {
           const payload = {
-            title: args?.addedRecords[0]['Subject'],
-            startT: args?.addedRecords[0]['StartTime'],
-            endT: args?.addedRecords[0]['EndTime'],
+            title: args?.addedRecords[0]['Subject']
+              ? args?.addedRecords[0]['Subject']
+              : args?.addedRecords[0]['eventName'],
+            startT: args?.addedRecords[0]['StartTime']
+              ? args?.addedRecords[0]['StartTime']
+              : args?.addedRecords[0]['startTime'],
+            endT: args?.addedRecords[0]['EndTime']
+              ? args?.addedRecords[0]['EndTime']
+              : args?.addedRecords[0]['endTime'],
           };
           this.pitchService
             .createEvent(this.pitchId, payload)
@@ -331,17 +340,40 @@ export class PitchSchedulerComponent
           modifiedRes.push(modifiedEvent);
         });
         this.data = modifiedRes;
+
         this.startHour = this.datePipe.transform(
           this.pitchDetails.openTime,
           'HH:mm'
         );
+
+        this.adjustEndTime;
         const endTime = this.datePipe.transform(
           this.pitchDetails.closeTime,
           'HH:mm'
         );
-        endTime === '23:00'
-          ? (this.endHour = '24:00')
-          : (this.endHour = endTime);
+
+        if (
+          new Date(this.pitchDetails.openTime).getHours() >
+          new Date(this.pitchDetails.closeTime).getHours()
+        ) {
+          this.endHour = this.adjustEndTime(
+            new Date(`${new Date().toDateString()} ${endTime}`)
+          )
+            .toTimeString()
+            .slice(0, 5);
+        } else {
+          if (endTime === '23:00') {
+            this.endHour = '24:00';
+          } else {
+            this.endHour = endTime;
+          }
+        }
+        this.workHours = {
+          start: this.startHour,
+          end: this.endHour,
+        };
+        console.log(this.startHour, this.endHour);
+        console.log(this.workHours);
         this.eventSettings = {
           ...this.eventSettings,
           dataSource: this.data,
@@ -349,6 +381,15 @@ export class PitchSchedulerComponent
         this.isLoadingData = false;
       });
     });
+  }
+
+  // this.scheduleObj?.closeQuickInfoPopup();
+  
+
+  private adjustEndTime(endTime: Date): Date {
+    const adjustedEndTime = new Date(endTime);
+    adjustedEndTime.setDate(adjustedEndTime.getDate() + 1);
+    return adjustedEndTime;
   }
 
   ngOnDestroy(): void {

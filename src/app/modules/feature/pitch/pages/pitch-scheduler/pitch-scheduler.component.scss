@@ -7,10 +7,10 @@
   border-radius: 5px;
 }
 
-// ::ng-deep.e-schedule .e-work-cells.e-disable-dates {
-//   cursor: not-allowed;
-//   pointer-events: none;
-// }
+::ng-deep.e-schedule .e-work-cells.e-disable-dates {
+  cursor: not-allowed;
+  pointer-events: none;
+}
 
 ::ng-deep.e-quick-popup-wrapper .e-popup-footer .e-event-details {
   display: none !important;
@@ -49,7 +49,23 @@
   align-items: center;
 }
 
-::ng-deep.isRtl.e-schedule .e-toolbar .e-toolbar-items.e-tbar-pos .e-toolbar-left {
+::ng-deep.isRtl.e-schedule
+  .e-toolbar
+  .e-toolbar-items.e-tbar-pos
+  .e-toolbar-left {
   display: flex;
   flex-direction: row-reverse !important;
+}
+
+::ng-deep.e-schedule {
+  ::ng-deep.template-wrap {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+  }
+  &.isRtl {
+    ::ng-deep.template-wrap {
+      flex-direction: row-reverse;
+    }
+  }
 }

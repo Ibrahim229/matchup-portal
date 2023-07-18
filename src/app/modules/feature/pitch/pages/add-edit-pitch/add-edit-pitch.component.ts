@@ -272,6 +272,11 @@ export class AddEditPitchComponent implements OnInit, OnDestroy, AfterViewInit {
         const file = this.pitchAttachments[i];
         formData.append('images', file, file.name);
       }
+    } else {
+      for (let i = 0; i < this.pitchAttachments.length; i++) {
+        const file = this.pitchAttachments[i];
+        formData.append('images', file, file.name);
+      }
     }
 
     formData.append('name', this.formControl('pitchDetails', 'name').value);

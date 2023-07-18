@@ -8,6 +8,7 @@ import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password
 import { MaterialModule } from '../../shared/material/material.module';
 import { UsersListingComponent } from './pages/users-listing/users-listing.component';
 import { RegisterUserModalComponent } from './components/register-user-modal/register-user-modal.component';
+import { PortalAnalyticsComponent } from './pages/portal-analytics/portal-analytics.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { RegisterUserModalComponent } from './components/register-user-modal/reg
     ForgotPasswordComponent,
     UsersListingComponent,
     RegisterUserModalComponent,
+    PortalAnalyticsComponent,
   ],
   imports: [CommonModule, AccountRoutingModule, SharedModule, MaterialModule],
 })

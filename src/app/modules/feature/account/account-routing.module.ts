@@ -7,6 +7,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { UsersListingComponent } from './pages/users-listing/users-listing.component';
 import { HomeGuard } from '../../core/guards/home.guard';
 import { AuthGuard } from '../../core/guards/auth.guard';
+import { PortalAnalyticsComponent } from './pages/portal-analytics/portal-analytics.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,19 @@ const routes: Routes = [
         path: 'change-password',
         component: ForgotPasswordComponent,
         canActivate: [AuthGuard],
+      },
+    ],
+  },
+  {
+    path: 'portal',
+    component: ContentLayoutComponent,
+    children: [
+      {
+        title: 'Analytics',
+        path: 'analytics',
+        component: PortalAnalyticsComponent,
+        canActivate: [AuthGuard],
+        pathMatch: 'full',
       },
     ],
   },

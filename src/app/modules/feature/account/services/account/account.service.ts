@@ -39,4 +39,12 @@ export class AccountService {
       body: payload,
     });
   }
+
+  getSystemAnalytics() {
+    return this.xhrService.call({
+      url: 'superAdmin/analytics/getUserAnalytics',
+      method: Method.get,
+      body: {},
+    });
+  }
 }

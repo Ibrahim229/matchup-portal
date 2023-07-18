@@ -30,6 +30,12 @@ export class ContentLayoutComponent implements OnInit {
       iconClasses: 'fa fa-regular fa-bookmark fa-fw',
       route: '/recommendations/',
     },
+    this.isHasRole(RoleType.Super_Admin) && {
+      id: 'ANALYTICS',
+      label: 'LABELS.ANALYTICS',
+      iconClasses: 'fa fa-solid fa-chart-simple fa-fw',
+      route: '/portal/analytics',
+    },
     // !this.isHasRole(RoleType.Tenant) && {
     //   id: 'PROPERTIES',
     //   label: 'LABELS.PROPERTIES',

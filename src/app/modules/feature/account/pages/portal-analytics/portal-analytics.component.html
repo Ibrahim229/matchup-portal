@@ -1,0 +1,48 @@
+<div class="page-container contracts-listing">
+    <div class="page-header">
+        <h4>
+            {{ 'LABELS.ANALYTICS' | translate }}
+        </h4>
+    </div>
+    <div class="page-content">
+        <section class="table-wrapper">
+            <data-table class="preview__table" [pagination]="false" [dataSource]="(usersTable$ | async)!"
+                *ngIf="usersTable$">
+                <ng-template #tableHead>
+                    <tr>
+                        <th>{{'LABELS.FORM.USER_NAME' | translate}}</th>
+                        <th>{{'LABELS.FORM.PHONE_NUMBER' | translate}}</th>
+                        <th>{{'LABELS.FORM.EMAIL' | translate}}</th>
+                        <th>{{'LABELS.FORM.GENDER' | translate}}</th>
+                        <th>{{'LABELS.FORM.BOOKINGS' | translate}}</th>
+                        <th>{{'LABELS.FORM.AGE' | translate}}</th>
+                    </tr>
+                </ng-template>
+                <ng-template #tableRows let-row>
+                    <tr>
+                        <td>
+                            {{row?.fullName}}
+                        </td>
+                        <td>
+                           <bdi> {{row?.phoneNumber}}</bdi>
+                        </td>
+                        <td>
+                            {{row?.email}}
+                        </td>
+                        <td>
+                            {{row?.gender}}
+                        </td>
+                        <td>
+                            {{row?.bookings}}
+                        </td>
+                        <td>
+                            {{row?.age}}
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template #loaderRef></ng-template>
+            </data-table>
+        </section>
+    </div>
+</div>

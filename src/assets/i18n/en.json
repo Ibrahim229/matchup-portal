@@ -5,6 +5,10 @@
     "FORM": {
       "EMAIL": "Email",
       "PASSWORD": "Password",
+      "AGE": "Age",
+      "PHONE_NUMBER": "Phone Number",
+      "GENDER": "Gender",
+      "BOOKINGS": "Bookings",
       "CURRENT_PASSWORD": "Current Password",
       "NEW_PASSWORD": "New Password",
       "CONFIRM_NEW_PASSWORD": "Confirm New Password",
@@ -57,7 +61,8 @@
     "INACTIVE": "Inactive",
     "DASHBOARD": "Dashboard",
     "DRAFT": "Draft",
-    "EXPIRED": "Expired"
+    "EXPIRED": "Expired",
+    "ANALYTICS": "Analytics"
   },
   "ACCOUNT": {
     "SIGN_IN": "Sign in",
@@ -113,12 +118,12 @@
     "DELETE_IMAGE": "Delete Image",
     "WORK_START": "Work Start",
     "WORK_END": "Work End",
-    "RECOMMENDATIONS":"Recommendations"
+    "RECOMMENDATIONS": "Recommendations"
   },
-  "RECOMMENDATIONS":{
-    "ADD_NEW_RECOMMENDATION":"Add New Recommendation",
-    "SELECT_PITCH":"Select Pitch",
-    "DELETE_RECOMMENDATION":"Delete Recommendation"
+  "RECOMMENDATIONS": {
+    "ADD_NEW_RECOMMENDATION": "Add New Recommendation",
+    "SELECT_PITCH": "Select Pitch",
+    "DELETE_RECOMMENDATION": "Delete Recommendation"
   },
   "INPUT_ERRORS": {
     "REQUIRED": "This field is required.",

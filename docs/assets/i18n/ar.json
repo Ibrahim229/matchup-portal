@@ -5,6 +5,10 @@
     "FORM": {
       "EMAIL": "البريد الالكتروني",
       "PASSWORD": "كلمة المرور",
+      "AGE":"السن",
+      "PHONE_NUMBER":"رقم الهاتف",
+      "GENDER": "النوع",
+      "BOOKINGS":"الحجوزات",
       "CURRENT_PASSWORD": "كلمة المرور الحالية",
       "NEW_PASSWORD": "كلمة المرور الجديدة",
       "CONFIRM_NEW_PASSWORD": "تأكيد كلمة المرور الجديدة",
@@ -57,7 +61,8 @@
     "INACTIVE": "غير نشط",
     "DASHBOARD": "اللوحة التنفيذية",
     "DRAFT": "مسودة",
-    "EXPIRED": "منتهي"
+    "EXPIRED": "منتهي",
+    "ANALYTICS": "الاحصائيات"
   },
   "ACCOUNT": {
     "SIGN_IN": "تسجيل الدخول",
@@ -114,13 +119,12 @@
     "DELETE_IMAGE": "حذف صورة",
     "WORK_START": "بداية العمل",
     "WORK_END": "نهاية العمل",
-    "RECOMMENDATIONS":"التوصيات"
+    "RECOMMENDATIONS": "التوصيات"
   },
-  "RECOMMENDATIONS":{
-    "ADD_NEW_RECOMMENDATION":"اضافة توصية جديدة",
-    "SELECT_PITCH":"اسم الملعب",
-    "DELETE_RECOMMENDATION":"حذف توصية"
-
+  "RECOMMENDATIONS": {
+    "ADD_NEW_RECOMMENDATION": "اضافة توصية جديدة",
+    "SELECT_PITCH": "اسم الملعب",
+    "DELETE_RECOMMENDATION": "حذف توصية"
   },
   "INPUT_ERRORS": {
     "REQUIRED": "هذا البيان اجباري.",

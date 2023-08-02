@@ -35,7 +35,7 @@ export class RecommendationsListingComponent implements OnInit {
     public dialog: MatDialog,
     private translationService: TranslationService,
     private toastrService: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.subs.add = this.translationService.currentLanguage$.subscribe(() => {
@@ -56,7 +56,7 @@ export class RecommendationsListingComponent implements OnInit {
       });
   }
 
-  handleRemoveRecommendation(PitchId: string) {
+  handleRemoveRecommendation(recommendationID: string) {
     const dialogData: ConfirmationDialog = {
       title: `RECOMMENDATIONS.DELETE_RECOMMENDATION`,
       message: 'LABELS.FORM.ARE_YOU_SURE',
@@ -70,7 +70,7 @@ export class RecommendationsListingComponent implements OnInit {
     return dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.subs.add = this.recommendationService
-          .deleteRecommendation(PitchId)
+          .deleteRecommendation(recommendationID)
           .subscribe((res) => {
             if (!res.error) {
               this.toastrService.showToastr(res.message, ToastrTypes.success);

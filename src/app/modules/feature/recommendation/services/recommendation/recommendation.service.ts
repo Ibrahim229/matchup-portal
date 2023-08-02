@@ -7,7 +7,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
   providedIn: 'root',
 })
 export class RecommenrdationService {
-  constructor(private xhrService: XhrService, private http: HttpClient) {}
+  constructor(private xhrService: XhrService, private http: HttpClient) { }
 
   getRecommendationsListing() {
     return this.xhrService.call({
@@ -33,9 +33,9 @@ export class RecommenrdationService {
     });
   }
 
-  deleteRecommendation(pitchId: string) {
+  deleteRecommendation(recommendationID: string) {
     return this.xhrService.call({
-      url: `pitch/recommended/${pitchId}`,
+      url: `pitch/recommended/${recommendationID}`,
       method: Method.delete,
       body: {},
     });

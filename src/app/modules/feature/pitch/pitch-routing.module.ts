@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PitchListingComponent } from './pages/pitch-listing/pitch-listing.component';
 import { RoleType } from '../../core/enums/role.enum';
 import { RolesGuard } from '../../core/guards/roles.guard';
 import { AddEditPitchComponent } from './pages/add-edit-pitch/add-edit-pitch.component';
 import { PitchDetailsComponent } from './pages/pitch-details/pitch-details.component';
-import { PitchSchedulerComponent } from './pages/pitch-scheduler/pitch-scheduler.component';
+import { PitchListingComponent } from './pages/pitch-listing/pitch-listing.component';
+import { PitchSchedulerComponent } from './pages/pitch-scheduler-2/pitch-scheduler.component';
 
 const routes: Routes = [
   {

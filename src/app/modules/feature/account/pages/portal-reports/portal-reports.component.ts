@@ -4,7 +4,14 @@ import {
   firstDateOfMonth,
   lastDateOfMonth,
 } from '@syncfusion/ej2-angular-schedule';
-import { Observable, debounceTime, map, of } from 'rxjs';
+import {
+  Observable,
+  combineLatest,
+  debounceTime,
+  map,
+  of,
+  startWith,
+} from 'rxjs';
 
 import {
   Filters,
@@ -42,13 +49,25 @@ export class PortalReportsComponent implements OnInit, OnDestroy {
   });
 
   ngOnInit(): void {
-    this.getSystemReports(this.filters.value);
-
-    this.subs.add = this.filters.valueChanges
+    this.subs.add = this.filters.controls.search.valueChanges
       .pipe(debounceTime(300))
-      .subscribe((filters) => {
+      .subscribe((search) => {
+        const filters = { ...this.filters.value, search };
         this.getSystemReports(filters);
       });
+
+    this.subs.add = combineLatest({
+      status: this.filters.controls.status.valueChanges.pipe(
+        startWith(Status.Booked)
+      ),
+      endDate: this.filters.controls.endDate.valueChanges.pipe(
+        startWith(lastDateOfMonth(this.currentDate))
+      ),
+    }).subscribe((filters) => {
+      if (filters.endDate !== null && filters.status !== null) {
+        this.getSystemReports({ ...this.filters.value, ...filters });
+      }
+    });
   }
 
   private getSystemReports(filters: Filters) {

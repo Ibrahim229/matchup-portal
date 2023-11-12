@@ -57,7 +57,7 @@
                 <br />
                 {{ row.date.end | date : "EEE, d MMMM yyyy, h aa" }}
               </td>
-              <td>{{ row.status }}</td>
+              <td>{{ row.status === "OutDated" ? "Booked" : row.status }}</td>
               <td>{{ row.ratePerHour }} EGP</td>
               <td>{{ row.payment }} EGP</td>
             </tr>

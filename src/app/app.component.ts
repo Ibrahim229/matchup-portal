@@ -22,6 +22,10 @@ export class AppComponent implements AfterViewInit {
     this.translationService.setLanguage(
       localStorage.getItem(Lang.DEFAULT_LANGUAGE) as string
     );
+
+    this.loaderService.isLoading$.subscribe(() => {
+      this.cd.detectChanges();
+    });
   }
   ngAfterViewInit(): void {
     this.cd.detectChanges();

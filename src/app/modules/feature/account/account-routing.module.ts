@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ContentLayoutComponent } from '../../core/components/content-layout/content-layout.component';
+import { AuthGuard } from '../../core/guards/auth.guard';
+import { HomeGuard } from '../../core/guards/home.guard';
 import { AccountLayoutComponent } from './components/account-layout/account-layout.component';
 import { ForgotPasswordComponent } from './pages/forgot-password/forgot-password.component';
 import { LoginComponent } from './pages/login/login.component';
-import { UsersListingComponent } from './pages/users-listing/users-listing.component';
-import { HomeGuard } from '../../core/guards/home.guard';
-import { AuthGuard } from '../../core/guards/auth.guard';
 import { PortalAnalyticsComponent } from './pages/portal-analytics/portal-analytics.component';
+import { PortalReportsComponent } from './pages/portal-reports/portal-reports.component';
+import { UsersListingComponent } from './pages/users-listing/users-listing.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,13 @@ const routes: Routes = [
         title: 'Analytics',
         path: 'analytics',
         component: PortalAnalyticsComponent,
+        canActivate: [AuthGuard],
+        pathMatch: 'full',
+      },
+      {
+        title: 'Reports',
+        path: 'reports',
+        component: PortalReportsComponent,
         canActivate: [AuthGuard],
         pathMatch: 'full',
       },

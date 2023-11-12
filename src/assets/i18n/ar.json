@@ -5,10 +5,10 @@
     "FORM": {
       "EMAIL": "البريد الالكتروني",
       "PASSWORD": "كلمة المرور",
-      "AGE":"السن",
-      "PHONE_NUMBER":"رقم الهاتف",
+      "AGE": "السن",
+      "PHONE_NUMBER": "رقم الهاتف",
       "GENDER": "النوع",
-      "BOOKINGS":"الحجوزات",
+      "BOOKINGS": "الحجوزات",
       "CURRENT_PASSWORD": "كلمة المرور الحالية",
       "NEW_PASSWORD": "كلمة المرور الجديدة",
       "CONFIRM_NEW_PASSWORD": "تأكيد كلمة المرور الجديدة",
@@ -62,7 +62,8 @@
     "DASHBOARD": "اللوحة التنفيذية",
     "DRAFT": "مسودة",
     "EXPIRED": "منتهي",
-    "ANALYTICS": "الاحصائيات"
+    "ANALYTICS": "الاحصائيات",
+    "REPORTS": "التقارير"
   },
   "ACCOUNT": {
     "SIGN_IN": "تسجيل الدخول",
@@ -137,5 +138,21 @@
     "DECIMAL_NUMBER": "This field must not contain a decimals",
     "DEFAULT_PATTERN": "القيمة المطلوبة: {{ label }}",
     "GREATER_THAN_ONE": "قيمة الحقل لابد ان تكون اكبر من 1"
+  },
+  "REPORTS": {
+    "FILTERS": {
+      "SEARCH": "بحث...",
+      "DURATION": "المدة",
+      "STATUS": "الحالة"
+    },
+    "TABLE": {
+      "USER_ID": "ID",
+      "USER_NAME": "اسم المستخدم",
+      "FIELD": "الملعب",
+      "DATE_TIME": "اليوم & الساعة",
+      "STATUS": "الحالة",
+      "RATE_PER_HOUR": "السعر في الساعو",
+      "PAYMENT": "المدفوع"
+    }
   }
 }

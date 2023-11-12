@@ -1,0 +1,71 @@
+<div class="page-container">
+  <div class="page-header">
+    <h4>{{ "LABELS.REPORTS" | translate }}</h4>
+  </div>
+
+  <div class="page-content">
+    <section class="reports">
+      <header class="reports__header">
+        <form-input
+          [label]="'REPORTS.FILTERS.SEARCH' | translate"
+          [type]="InputTypes.SEARCH"
+          [FormControl]="filters.controls.search"
+        />
+
+        <form-input
+          [label]="'REPORTS.FILTERS.DURATION' | translate"
+          [type]="InputTypes.DATE_PICKER"
+          [FormControl]="{
+            start: filters.controls.startDate,
+            end: filters.controls.endDate
+          }"
+        />
+        <form-input
+          [label]="'REPORTS.FILTERS.STATUS' | translate"
+          [type]="InputTypes.SELECT"
+          [FormControl]="filters.controls.status"
+          [selectOptions]="{ list: statusList, key: 'key', value: 'value' }"
+        />
+      </header>
+
+      <div class="reports__body">
+        <data-table
+          class="reports__body__table"
+          [pagination]="false"
+          [dataSource]="(reportsData$ | async)!"
+        >
+          <ng-template #tableHead>
+            <tr>
+              <th>#</th>
+              <th>{{ "REPORTS.TABLE.USER_ID" | translate }}</th>
+              <th>{{ "REPORTS.TABLE.USER_NAME" | translate }}</th>
+              <th>{{ "REPORTS.TABLE.FIELD" | translate }}</th>
+              <th>{{ "REPORTS.TABLE.DATE_TIME" | translate }}</th>
+              <th>{{ "REPORTS.TABLE.STATUS" | translate }}</th>
+              <th>{{ "REPORTS.TABLE.RATE_PER_HOUR" | translate }}</th>
+              <th>{{ "REPORTS.TABLE.PAYMENT" | translate }}</th>
+            </tr>
+          </ng-template>
+          <ng-template #tableRows let-row>
+            <tr>
+              <td class="number">{{ row.count }}</td>
+              <td>{{ row.userId }}</td>
+              <td>{{ row.fullName }}</td>
+              <td>{{ row.field }} ({{ row.playersNumber }} a side)</td>
+              <td class="date">
+                {{ row.date.start | date : "EEE, d MMMM yyyy, h aa" }}
+                <br />
+                {{ row.date.end | date : "EEE, d MMMM yyyy, h aa" }}
+              </td>
+              <td>{{ row.status }}</td>
+              <td>{{ row.ratePerHour }} EGP</td>
+              <td>{{ row.payment }} EGP</td>
+            </tr>
+          </ng-template>
+
+          <ng-template #loaderRef></ng-template>
+        </data-table>
+      </div>
+    </section>
+  </div>
+</div>

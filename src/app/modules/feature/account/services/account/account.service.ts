@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
+
 import { Method } from 'src/app/modules/core/enums/method.enum';
 import { XhrService } from 'src/app/modules/core/services/xhr/xhr.service';
-import { ChangePasswordPayload } from '../../models/change-password-payload.model';
+import { ChangePasswordPayload } from 'src/app/modules/feature/account/models/change-password-payload.model';
+import { Filters } from 'src/app/modules/feature/account/models/reports.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,6 +34,7 @@ export class AccountService {
       body: {},
     });
   }
+
   changePassword(payload: ChangePasswordPayload) {
     return this.xhrService.call({
       url: 'admin/changePass',
@@ -45,6 +48,14 @@ export class AccountService {
       url: 'superAdmin/analytics/getUserAnalytics',
       method: Method.get,
       body: {},
+    });
+  }
+
+  getSystemReports(body: Filters) {
+    return this.xhrService.call({
+      url: 'superAdmin/analytics/getUserReports',
+      method: Method.post,
+      body,
     });
   }
 }

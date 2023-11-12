@@ -1,34 +1,35 @@
 <table class="table" RtlDir>
-    <thead class="table__head">
-        <ng-container *ngTemplateOutlet="tableHead"></ng-container>
-    </thead>
+  <thead class="table__head">
+    <ng-container *ngTemplateOutlet="tableHead"></ng-container>
+  </thead>
 
-    <ng-container *ngIf="dataSource && dataSource.data.length !== 0">
-
-
-        <tbody class="table__body">
-            <ng-container *ngFor="let row of dataSource?.data">
-                <ng-container *ngTemplateOutlet="tableRows; context: {$implicit: row}">
-                </ng-container>
-            </ng-container>
-        </tbody>
-
-    </ng-container>
+  <ng-container *ngIf="dataSource && dataSource.data.length !== 0">
+    <tbody class="table__body">
+      <ng-container *ngFor="let row of dataSource?.data">
+        <ng-container
+          *ngTemplateOutlet="tableRows; context: { $implicit: row }"
+        ></ng-container>
+      </ng-container>
+    </tbody>
+  </ng-container>
 </table>
 
-<empty-state *ngIf="
-      dataSource &&
-      !dataSource.data.length
-    " [emptyStateConfig]="{
-      headline:
-        dataSource && (dataSource.emptyState ?? 'No Search Results found!')
-    }"></empty-state>
+<empty-state
+  *ngIf="dataSource && !dataSource.data.length"
+  [emptyStateConfig]="{
+    headline:
+      dataSource && (dataSource.emptyState ?? 'No Search Results found!')
+  }"
+></empty-state>
 
-<div class="table__foot" RtlDir>
-    <mat-paginator *ngIf="pagination" class="table__paginator" [length]="length" [pageIndex]="pageIndex"
-        [pageSize]="pageSize" (page)="getData($event)">
-    </mat-paginator>
+<div class="table__foot" RtlDir *ngIf="pagination">
+  <mat-paginator
+    class="table__paginator"
+    [length]="length"
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    (page)="getData($event)"
+  ></mat-paginator>
 </div>
 
 <ng-content></ng-content>
-

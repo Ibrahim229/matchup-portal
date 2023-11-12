@@ -12,15 +12,15 @@ import {
 import { FormControl, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { MatSelect } from '@angular/material/select';
-import { BehaviorSubject, merge, Observable, of } from 'rxjs';
+import 'moment/locale/ar';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import {
+  RadioOption,
+  RangeDatePicker,
+  SelectOptions,
+} from '../../_models/form-input-model';
 import { InputTypes } from '../../enums/form-input-types.enum';
 import { Subscriptions } from '../../utils/subscriptions';
-import {
-  SelectOptions,
-  RangeDatePicker,
-  RadioOption,
-} from '../../_models/form-input-model';
-import 'moment/locale/ar';
 
 @Component({
   selector: 'form-input',
@@ -40,7 +40,7 @@ export class FormInputComponent implements OnInit {
   @Input() type: InputTypes = InputTypes.TEXT;
   @Input() placeholder?: string;
   @Input() max: number;
-  @Input() FormControl!: FormControl;
+  @Input() FormControl!: FormControl | RangeDatePicker;
   @Input() selectOptions?: SelectOptions;
   @Input() radioOptions?: RadioOption[];
   @Input() iconClass?: boolean = false;
@@ -93,7 +93,9 @@ export class FormInputComponent implements OnInit {
   }
 
   get isError() {
-      return this.FormControl && this.FormControl.errors && this.FormControl.touched
+    return (
+      this.formControl && this.formControl.errors && this.formControl.touched
+    );
   }
 
   get selectOptionsList$() {
@@ -123,6 +125,14 @@ export class FormInputComponent implements OnInit {
     return this.originalList.filter((item) =>
       this.formControl.value.includes(item[this.selectOptions?.key ?? 'key'])
     );
+  }
+
+  get isRangeDatePicker() {
+    return (this.FormControl as RangeDatePicker)?.start !== undefined;
+  }
+
+  get datePicker() {
+    return this.FormControl as RangeDatePicker;
   }
 
   onRemoveSelected(key: string) {

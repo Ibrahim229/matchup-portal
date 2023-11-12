@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslationService } from '../../services/translation/translation.service';
-import { RoleType } from '../../enums/role.enum';
 import { isHasRole } from 'src/app/modules/shared/utils/isHasRole';
+import { RoleType } from '../../enums/role.enum';
+import { TranslationService } from '../../services/translation/translation.service';
 
 @Component({
   selector: 'content-layout',
@@ -35,6 +35,12 @@ export class ContentLayoutComponent implements OnInit {
       label: 'LABELS.ANALYTICS',
       iconClasses: 'fa fa-solid fa-chart-simple fa-fw',
       route: '/portal/analytics',
+    },
+    this.isHasRole(RoleType.Super_Admin) && {
+      id: 'REPORTS',
+      label: 'LABELS.REPORTS',
+      iconClasses: 'fa fa-solid fa-chart-bar fa-fw',
+      route: '/portal/reports',
     },
     // !this.isHasRole(RoleType.Tenant) && {
     //   id: 'PROPERTIES',

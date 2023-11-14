@@ -6,9 +6,7 @@
   <ng-container *ngIf="dataSource && dataSource.data.length !== 0">
     <tbody class="table__body">
       <ng-container *ngFor="let row of dataSource?.data">
-        <ng-container
-          *ngTemplateOutlet="tableRows; context: { $implicit: row }"
-        ></ng-container>
+        <ng-container *ngTemplateOutlet="tableRows; context: { $implicit: row }"></ng-container>
       </ng-container>
     </tbody>
   </ng-container>
@@ -16,10 +14,7 @@
 
 <empty-state
   *ngIf="dataSource && !dataSource.data.length"
-  [emptyStateConfig]="{
-    headline:
-      dataSource && (dataSource.emptyState ?? 'No Search Results found!')
-  }"
+  [emptyStateConfig]="{ headline: dataSource && (dataSource.emptyState ?? 'No Search Results found!') }"
 ></empty-state>
 
 <div class="table__foot" RtlDir *ngIf="pagination">

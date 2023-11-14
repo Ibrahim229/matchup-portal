@@ -29,21 +29,49 @@
       </header>
 
       <div class="reports__body">
-        <data-table
-          class="reports__body__table"
-          [pagination]="false"
-          [dataSource]="(reportsData$ | async)!"
-        >
+        <data-table class="reports__body__table" [pagination]="false" [dataSource]="(reportsData$ | async)!">
           <ng-template #tableHead>
             <tr>
-              <th>#</th>
+              <th>
+                <button class="reports__body__table__sort" (click)="toggleSort('countOrder')">
+                  #
+                  <ng-container
+                    [ngTemplateOutlet]="arrow"
+                    [ngTemplateOutletContext]="{ $implicit: filters.controls.countOrder }"
+                  />
+                </button>
+              </th>
               <th>{{ "REPORTS.TABLE.USER_ID" | translate }}</th>
               <th>{{ "REPORTS.TABLE.USER_NAME" | translate }}</th>
               <th>{{ "REPORTS.TABLE.FIELD" | translate }}</th>
-              <th>{{ "REPORTS.TABLE.DATE_TIME" | translate }}</th>
+              <th>
+                <button class="reports__body__table__sort" (click)="toggleSort('startDateOrder')">
+                  {{ "REPORTS.TABLE.DATE_TIME" | translate }}
+                  <ng-container
+                    [ngTemplateOutlet]="arrow"
+                    [ngTemplateOutletContext]="{ $implicit: filters.controls.startDateOrder }"
+                  />
+                </button>
+              </th>
               <th>{{ "REPORTS.TABLE.STATUS" | translate }}</th>
-              <th>{{ "REPORTS.TABLE.RATE_PER_HOUR" | translate }}</th>
-              <th>{{ "REPORTS.TABLE.PAYMENT" | translate }}</th>
+              <th>
+                <button class="reports__body__table__sort" (click)="toggleSort('rateOrder')">
+                  {{ "REPORTS.TABLE.RATE_PER_HOUR" | translate }}
+                  <ng-container
+                    [ngTemplateOutlet]="arrow"
+                    [ngTemplateOutletContext]="{ $implicit: filters.controls.rateOrder }"
+                  />
+                </button>
+              </th>
+              <th>
+                <button class="reports__body__table__sort" (click)="toggleSort('paymentOrder')">
+                  {{ "REPORTS.TABLE.PAYMENT" | translate }}
+                  <ng-container
+                    [ngTemplateOutlet]="arrow"
+                    [ngTemplateOutletContext]="{ $implicit: filters.controls.paymentOrder }"
+                  />
+                </button>
+              </th>
             </tr>
           </ng-template>
           <ng-template #tableRows let-row>
@@ -57,7 +85,7 @@
                 <br />
                 {{ row.date.end | date : "EEE, d MMMM yyyy, h aa" }}
               </td>
-              <td>{{ row.status === "OutDated" ? "Booked" : row.status }}</td>
+              <td>{{ row.status === "OutDated" ? "Booked" : row.status === "Active" ? "Current" : row.status }}</td>
               <td>{{ row.ratePerHour }} EGP</td>
               <td>{{ row.payment }} EGP</td>
             </tr>
@@ -69,3 +97,12 @@
     </section>
   </div>
 </div>
+
+<ng-template #arrow let-control>
+  <i
+    *ngIf="control.value !== null"
+    class="fa-solid"
+    [class.fa-arrow-down]="control.value === 'desc'"
+    [class.fa-arrow-up]="control.value === 'asc'"
+  ></i>
+</ng-template>

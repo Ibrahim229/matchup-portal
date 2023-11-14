@@ -28,6 +28,11 @@
       flex-direction: column;
       position: relative;
 
+      &__sort {
+        all: unset;
+        cursor: pointer;
+      }
+
       .number {
         min-width: 50px;
         max-width: 50px;
@@ -38,8 +43,25 @@
         max-width: unset;
       }
 
-      &::ng-deep .table {
-        overflow: unset;
+      &::ng-deep {
+        .table {
+          overflow: unset;
+
+          th,td {
+            min-width: 200px;
+            max-width: 200px;
+            
+            &:nth-child(1) {
+              min-width: 60px;
+              max-width: 60px;
+            }
+
+            &:nth-child(n+6) {
+              min-width: 150px;
+              max-width: 150px;
+            }
+          }
+        }
 
         empty-state {
           display: block;

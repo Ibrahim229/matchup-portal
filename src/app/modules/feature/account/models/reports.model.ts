@@ -1,4 +1,5 @@
 export enum Status {
+  Current = 'Active',
   Booked = 'OutDated',
   Cancelled = 'Cancelled',
 }

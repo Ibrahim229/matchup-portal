@@ -62,7 +62,8 @@
     "DASHBOARD": "Dashboard",
     "DRAFT": "Draft",
     "EXPIRED": "Expired",
-    "ANALYTICS": "Analytics"
+    "ANALYTICS": "Analytics",
+    "REPORTS": "Reports"
   },
   "ACCOUNT": {
     "SIGN_IN": "Sign in",
@@ -136,5 +137,21 @@
     "DECIMAL_NUMBER": "This field must not contain a decimals",
     "DEFAULT_PATTERN": "The required pattern is: {{ label }}",
     "GREATER_THAN_ONE": "This field value must be greater than 1"
+  },
+  "REPORTS": {
+    "FILTERS": {
+      "SEARCH": "Search...",
+      "DURATION": "Duration",
+      "STATUS": "Status"
+    },
+    "TABLE": {
+      "USER_ID": "User ID",
+      "USER_NAME": "User Name",
+      "FIELD": "Field",
+      "DATE_TIME": "Date & Time",
+      "STATUS": "Status",
+      "RATE_PER_HOUR": "Rate Per Hour",
+      "PAYMENT": "Payment"
+    }
   }
 }

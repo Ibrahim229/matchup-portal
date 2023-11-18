@@ -1,0 +1,74 @@
+@import "abstracts/variables";
+
+.calendar-wrapper {
+  background-color: #fff;
+  padding: 24px;
+  margin: 24px;
+  border-radius: 5px;
+  height: calc(100% - 48px);
+}
+
+/* To disable the cell click action in schedule */
+::ng-deep.e-disable-dates {
+  pointer-events: none;
+}
+
+/* To enable showing event quick info popup action on month view */
+::ng-deep.e-disable-dates .e-appointment-wrapper {
+  pointer-events: all;
+}
+
+::ng-deep {
+  .e-timeline-week,
+  .e-toolbar-item.e-today {
+    display: none !important;
+  }
+  .e-btn.e-flat.e-primary,
+  .e-css.e-btn.e-flat.e-primary {
+    color: $green-900;
+    &:focus,
+    &:hover {
+      color: $green-900;
+      background: #0792471f;
+    }
+  }
+  .e-schedule-dialog.e-event-delete {
+    color: $red;
+    &:focus,
+    &:hover {
+      color: $red-900;
+    }
+  }
+}
+
+::ng-deep.isRtl.e-schedule
+  .e-toolbar
+  .e-toolbar-items.e-tbar-pos
+  .e-toolbar-left {
+  display: flex;
+  flex-direction: row-reverse !important;
+}
+
+::ng-deep.e-schedule {
+  .template-wrap {
+    display: flex;
+    gap: 50px;
+    justify-content: space-between;
+  }
+
+  &.isRtl .template-wrap {
+    flex-direction: row-reverse;
+  }
+}
+
+// add edit modal
+::ng-deep {
+  .e-schedule-dialog .e-all-day-time-zone-row,
+  .e-location-container {
+    display: none;
+  }
+
+  .e-subject-container {
+    width: 100% !important;
+  }
+}

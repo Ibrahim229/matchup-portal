@@ -9,6 +9,7 @@ import { MaterialModule } from '../../shared/material/material.module';
 import { UsersListingComponent } from './pages/users-listing/users-listing.component';
 import { RegisterUserModalComponent } from './components/register-user-modal/register-user-modal.component';
 import { PortalAnalyticsComponent } from './pages/portal-analytics/portal-analytics.component';
+import { PortalReportsComponent } from './pages/portal-reports/portal-reports.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { PortalAnalyticsComponent } from './pages/portal-analytics/portal-analyt
     UsersListingComponent,
     RegisterUserModalComponent,
     PortalAnalyticsComponent,
+    PortalReportsComponent,
   ],
   imports: [CommonModule, AccountRoutingModule, SharedModule, MaterialModule],
 })

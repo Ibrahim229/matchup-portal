@@ -1,149 +1,269 @@
 <div class="form-input-container" RtlDir>
-    <ng-container [ngSwitch]="type">
-        <mat-form-field *ngSwitchCase="InputTypes.DATE_PICKER" class="form-input" appearance="fill">
-            <mat-label class="form-input__label">{{ label | translate }}</mat-label>
+  <ng-container [ngSwitch]="type">
+    <mat-form-field
+      *ngSwitchCase="InputTypes.DATE_PICKER"
+      class="form-input"
+      appearance="fill"
+    >
+      <mat-label class="form-input__label">{{ label | translate }}</mat-label>
 
-            <input matInput [matDatepicker]="picker" [formControl]="formControl" />
+      <input
+        *ngIf="!isRangeDatePicker"
+        matInput
+        [matDatepicker]="picker"
+        [formControl]="formControl"
+      />
 
-            <!-- <mat-date-range-input *ngIf="isRangeDatePicker" [rangePicker]="rangePicker">
-                <input matStartDate placeholder="Start date" [formControl]="datePicker.start" />
-                <input matEndDate placeholder="End date" [formControl]="datePicker.end" />
-            </mat-date-range-input> -->
+      <mat-date-range-input
+        *ngIf="isRangeDatePicker"
+        [rangePicker]="rangePicker"
+      >
+        <input
+          matStartDate
+          placeholder="Start date"
+          [formControl]="datePicker.start"
+        />
+        <input
+          matEndDate
+          placeholder="End date"
+          [formControl]="datePicker.end"
+        />
+      </mat-date-range-input>
 
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <!-- <mat-datepicker-toggle *ngIf="isRangeDatePicker" matSuffix [for]="rangePicker"></mat-datepicker-toggle> -->
-            <mat-date-range-picker #rangePicker></mat-date-range-picker>
-            <mat-datepicker #picker></mat-datepicker>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="isRangeDatePicker ? rangePicker : picker"
+      ></mat-datepicker-toggle>
 
-            <mat-error>
-                <error-message [FormControl]="formControl" [isError]="isError" >
-                </error-message>
-            </mat-error>
-        </mat-form-field>
+      <mat-date-range-picker #rangePicker></mat-date-range-picker>
+      <mat-datepicker #picker></mat-datepicker>
 
-        <locale-date-picker *ngSwitchCase="InputTypes.LOCALE_DATE_PICKER" [label]="label" [formControl]="formControl"
-            [isArabicDatePicker]="isArabicDatePicker"></locale-date-picker>
+      <mat-error>
+        <error-message [FormControl]="formControl" [isError]="isError">
+        </error-message>
+      </mat-error>
+    </mat-form-field>
 
-        <mat-slide-toggle *ngSwitchCase="InputTypes.TOGGLE" class="form-toggle" [formControl]="formControl">
-            {{ label | translate }}
-        </mat-slide-toggle>
+    <locale-date-picker
+      *ngSwitchCase="InputTypes.LOCALE_DATE_PICKER"
+      [label]="label"
+      [formControl]="formControl"
+      [isArabicDatePicker]="isArabicDatePicker"
+    ></locale-date-picker>
 
-        <mat-radio-group *ngSwitchCase="InputTypes.RADIO" aria-label="Select an option" class="form-radio" disableRipple
-            [formControl]="formControl">
-            <mat-radio-button *ngFor="let option of radioOptions" [value]="option.key"
-                [checked]="option?.checked || formControl.value === option.key" [disabled]="option?.disabled">
-                {{ option.value }}
-            </mat-radio-button>
-        </mat-radio-group>
+    <mat-slide-toggle
+      *ngSwitchCase="InputTypes.TOGGLE"
+      class="form-toggle"
+      [formControl]="formControl"
+    >
+      {{ label | translate }}
+    </mat-slide-toggle>
 
-        <mat-form-field *ngSwitchDefault [ngClass]="{search: type === InputTypes.SEARCH,'is-readonly': isReadonly}"
-            class="form-input" appearance="fill">
-            <mat-label class="form-input__label">{{ label | translate }}</mat-label>
+    <mat-radio-group
+      *ngSwitchCase="InputTypes.RADIO"
+      aria-label="Select an option"
+      class="form-radio"
+      disableRipple
+      [formControl]="formControl"
+    >
+      <mat-radio-button
+        *ngFor="let option of radioOptions"
+        [value]="option.key"
+        [checked]="option?.checked || formControl.value === option.key"
+        [disabled]="option?.disabled"
+      >
+        {{ option.value }}
+      </mat-radio-button>
+    </mat-radio-group>
 
-            <ng-container [ngSwitch]="type">
-                <textarea matInput rows="5" class="form-input__input" *ngSwitchCase="InputTypes.TEXT_AREA"
-                    [formControl]="formControl" [placeholder]="placeholder ?? ''" autocomplete="off">
+    <mat-form-field
+      *ngSwitchDefault
+      [ngClass]="{
+        search: type === InputTypes.SEARCH,
+        'is-readonly': isReadonly
+      }"
+      class="form-input"
+      appearance="fill"
+    >
+      <mat-label class="form-input__label">{{ label | translate }}</mat-label>
+
+      <ng-container [ngSwitch]="type">
+        <textarea
+          matInput
+          rows="5"
+          class="form-input__input"
+          *ngSwitchCase="InputTypes.TEXT_AREA"
+          [formControl]="formControl"
+          [placeholder]="placeholder ?? ''"
+          autocomplete="off"
+        >
         </textarea>
 
-                <mat-select class="form-input__input" *ngSwitchCase="InputTypes.SELECT" [formControl]="formControl"
-                    [multiple]="selectOptions?.multiple || false" (selectionChange)="_selectedOption($event)">
-                    <mat-option class="form-input__dropdown-search">
-                        <ngx-mat-select-search placeholderLabel="Search..."
-                            noEntriesFoundLabel="No matching value found!."
-                            [formControl]="dropDownSearchFormControl"></ngx-mat-select-search>
-                    </mat-option>
+        <mat-select
+          class="form-input__input"
+          *ngSwitchCase="InputTypes.SELECT"
+          [formControl]="formControl"
+          [multiple]="selectOptions?.multiple || false"
+          (selectionChange)="_selectedOption($event)"
+        >
+          <!-- <mat-option class="form-input__dropdown-search">
+            <ngx-mat-select-search
+              placeholderLabel="Search..."
+              noEntriesFoundLabel="No matching value found!."
+              [formControl]="dropDownSearchFormControl"
+            ></ngx-mat-select-search>
+          </mat-option> -->
 
-                    <mat-option *ngFor="let option of (filteredList$ | async)!"
-                        [value]="option[selectOptions?.key!] ?? option">
-                        <ng-container *ngTemplateOutlet="
+          <mat-option
+            *ngFor="let option of (filteredList$ | async)!"
+            [value]="option[selectOptions?.key!] ?? option"
+          >
+            <ng-container
+              *ngTemplateOutlet="
                 selectOption || defaultOption;
-                context: {$implicit: option, value: selectOptions?.value}
-              ">
-                        </ng-container>
-                    </mat-option>
-                </mat-select>
-
-                <mat-select class="form-input__input" *ngSwitchCase="InputTypes.SELECT_CHIPS"
-                    [formControl]="formControl" [multiple]="selectOptions?.multiple || false"
-                    (selectionChange)="_selectedOption($event)">
-                    <mat-option class="form-input__dropdown-search">
-                        <ngx-mat-select-search placeholderLabel="Search..."
-                            noEntriesFoundLabel="No matching value found!."
-                            [formControl]="dropDownSearchFormControl"></ngx-mat-select-search>
-                    </mat-option>
-
-                    <mat-option *ngFor="let option of (filteredList$ | async)!"
-                        [value]="option[selectOptions?.key ?? 'key'] ?? option">
-                        <ng-container *ngTemplateOutlet="
-                selectOption || defaultOption;
-                context: {$implicit: option, value: selectOptions?.value}
-              ">
-                        </ng-container>
-                    </mat-option>
-                </mat-select>
-
-                <ng-container *ngSwitchCase="InputTypes.AUTO_COMPLETE">
-                    <input matInput class="form-input__input" [placeholder]="placeholder ?? ''" [type]="InputTypes.TEXT"
-                        [formControl]="formControl" [matAutocomplete]="auto" [readonly]="isReadonly" />
-
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option disabled *ngIf="(selectOptionsList$ | async)?.length === 0">
-                            no user found
-                        </mat-option>
-
-                        <mat-option *ngFor="let option of (selectOptionsList$ | async)!"
-                            [value]="option[selectOptions?.key!] ?? option"
-                            (onSelectionChange)="_selectedOption($event, option)">
-                            <ng-container *ngTemplateOutlet="
-                  selectOption || defaultOption;
-                  context: {$implicit: option, value: selectOptions?.value}
-                ">
-                            </ng-container>
-                        </mat-option>
-                    </mat-autocomplete>
-                </ng-container>
-
-                <input matInput *ngSwitchCase="InputTypes.NUMBER" class="form-input__input" type="number" min="0"
-                    [placeholder]="type === InputTypes.SEARCH ? label : placeholder ?? ''" [formControl]="formControl"
-                    autocomplete="off" [readonly]="isReadonly" />
-
-                <ng-container *ngSwitchCase="InputTypes.PASSWORD">
-                    <input matInput class="form-input__input" type="password" [type]="hide ? 'password' : 'text'"
-                        [placeholder]="placeholder ?? ''" [formControl]="formControl" autocomplete="new-password"
-                        [readonly]="isReadonly" />
-                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </ng-container>
-
-
-                <input matInput *ngSwitchDefault class="form-input__input" autocomplete="off"
-                    [placeholder]="type === InputTypes.SEARCH ? label : placeholder ?? ''" [formControl]="formControl"
-                    [type]="type" [readonly]="isReadonly" />
+                context: { $implicit: option, value: selectOptions?.value }
+              "
+            >
             </ng-container>
+          </mat-option>
+        </mat-select>
 
-            <mat-error>
-                <error-message [FormControl]="formControl" [isError]="isError" ></error-message>
-            </mat-error>
+        <mat-select
+          class="form-input__input"
+          *ngSwitchCase="InputTypes.SELECT_CHIPS"
+          [formControl]="formControl"
+          [multiple]="selectOptions?.multiple || false"
+          (selectionChange)="_selectedOption($event)"
+        >
+          <mat-option class="form-input__dropdown-search">
+            <ngx-mat-select-search
+              placeholderLabel="Search..."
+              noEntriesFoundLabel="No matching value found!."
+              [formControl]="dropDownSearchFormControl"
+            ></ngx-mat-select-search>
+          </mat-option>
 
-            <span RtlDir *ngIf="iconClass" class="form-input__icon">{{'LABELS.SAR' | translate}}</span>
-        </mat-form-field>
-    </ng-container>
+          <mat-option
+            *ngFor="let option of (filteredList$ | async)!"
+            [value]="option[selectOptions?.key ?? 'key'] ?? option"
+          >
+            <ng-container
+              *ngTemplateOutlet="
+                selectOption || defaultOption;
+                context: { $implicit: option, value: selectOptions?.value }
+              "
+            >
+            </ng-container>
+          </mat-option>
+        </mat-select>
 
-    <div class="optional" *ngIf="isOptional">
-        <span class="optional__icon icon-info"></span>
-        Optional!
-    </div>
+        <ng-container *ngSwitchCase="InputTypes.AUTO_COMPLETE">
+          <input
+            matInput
+            class="form-input__input"
+            [placeholder]="placeholder ?? ''"
+            [type]="InputTypes.TEXT"
+            [formControl]="formControl"
+            [matAutocomplete]="auto"
+            [readonly]="isReadonly"
+          />
 
-    <ng-template #defaultOption let-option let-value="value">
-        {{ option[value] ?? option['value'] ?? option }}
-    </ng-template>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option
+              disabled
+              *ngIf="(selectOptionsList$ | async)?.length === 0"
+            >
+              no user found
+            </mat-option>
 
-    <mat-chip-list *ngIf="type === InputTypes.SELECT_CHIPS">
-        <mat-chip class="select-chips" *ngFor="let selected of selectOptionsList" [removable]="true"
-            (removed)="onRemoveSelected(selected[selectOptions?.key ?? 'key'])">
-            <img *ngIf="selected.imgUrl" matChipAvatar [src]="selected.imgUrl" />
-            {{ selected[selectOptions?.value ?? 'value'] ?? selected }}
-            <mat-icon class="select-chips__icon" matChipRemove>cancel</mat-icon>
-        </mat-chip>
-    </mat-chip-list>
+            <mat-option
+              *ngFor="let option of (selectOptionsList$ | async)!"
+              [value]="option[selectOptions?.key!] ?? option"
+              (onSelectionChange)="_selectedOption($event, option)"
+            >
+              <ng-container
+                *ngTemplateOutlet="
+                  selectOption || defaultOption;
+                  context: { $implicit: option, value: selectOptions?.value }
+                "
+              >
+              </ng-container>
+            </mat-option>
+          </mat-autocomplete>
+        </ng-container>
 
+        <input
+          matInput
+          *ngSwitchCase="InputTypes.NUMBER"
+          class="form-input__input"
+          type="number"
+          min="0"
+          [placeholder]="type === InputTypes.SEARCH ? label : placeholder ?? ''"
+          [formControl]="formControl"
+          autocomplete="off"
+          [readonly]="isReadonly"
+        />
+
+        <ng-container *ngSwitchCase="InputTypes.PASSWORD">
+          <input
+            matInput
+            class="form-input__input"
+            type="password"
+            [type]="hide ? 'password' : 'text'"
+            [placeholder]="placeholder ?? ''"
+            [formControl]="formControl"
+            autocomplete="new-password"
+            [readonly]="isReadonly"
+          />
+          <mat-icon matSuffix (click)="hide = !hide">{{
+            hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+        </ng-container>
+
+        <input
+          matInput
+          *ngSwitchDefault
+          class="form-input__input"
+          autocomplete="off"
+          [placeholder]="type === InputTypes.SEARCH ? label : placeholder ?? ''"
+          [formControl]="formControl"
+          [type]="type"
+          [readonly]="isReadonly"
+        />
+      </ng-container>
+
+      <mat-error>
+        <error-message
+          [FormControl]="formControl"
+          [isError]="isError"
+        ></error-message>
+      </mat-error>
+
+      <span RtlDir *ngIf="iconClass" class="form-input__icon">{{
+        "LABELS.SAR" | translate
+      }}</span>
+    </mat-form-field>
+  </ng-container>
+
+  <div class="optional" *ngIf="isOptional">
+    <span class="optional__icon icon-info"></span>
+    Optional!
+  </div>
+
+  <ng-template #defaultOption let-option let-value="value">
+    {{ option[value] ?? option["value"] ?? option }}
+  </ng-template>
+
+  <mat-chip-list *ngIf="type === InputTypes.SELECT_CHIPS">
+    <mat-chip
+      class="select-chips"
+      *ngFor="let selected of selectOptionsList"
+      [removable]="true"
+      (removed)="onRemoveSelected(selected[selectOptions?.key ?? 'key'])"
+    >
+      <img *ngIf="selected.imgUrl" matChipAvatar [src]="selected.imgUrl" />
+      {{ selected[selectOptions?.value ?? "value"] ?? selected }}
+      <mat-icon class="select-chips__icon" matChipRemove>cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
 </div>

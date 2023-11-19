@@ -92,36 +92,32 @@ export class PitchSchedulerComponent implements OnDestroy {
   ) {
     this.processResponse();
     this.getPitchId();
-    this.getCurrrentLanguage();
+    this.getCurrentLanguage();
   }
 
   private getPitchId() {
-    this.subs.add = this.activatedRoute.params.subscribe(
-      ({ id }: { id: string }) => {
-        this.dataQuery.addParams('pitchId', id);
-        this.pitchId = id;
-      }
-    );
+    this.subs.add = this.activatedRoute.params.subscribe(({ id }: { id: string }) => {
+      this.dataQuery.addParams('pitchId', id);
+      this.pitchId = id;
+    });
   }
 
-  private getCurrrentLanguage() {
-    this.subs.add = this.translationService.currentLanguage$.subscribe(
-      (language) => {
-        this.currentLang = language;
-      }
-    );
+  private getCurrentLanguage() {
+    this.subs.add = this.translationService.currentLanguage$.subscribe((language) => {
+      this.currentLang = language;
+    });
   }
 
   private processResponse() {
-    this.dataManager.adaptor.processResponse = (
-      data: (FieldModel & { fromMobile: string; _id: string })[]
-    ) => {
+    this.dataManager.adaptor.processResponse = (data: (FieldModel & { fromMobile: string; _id: string })[]) => {
       return !Array.isArray(data)
         ? data
         : data.map((event) => ({
             ...event,
             id: event._id,
             categoryColor: event.fromMobile ? '#ffcb14' : '#079247',
+            phoneNumber: event['user'].phoneNumber,
+            fullName: event['user'].fullName,
           }));
     };
   }
@@ -140,12 +136,7 @@ export class PitchSchedulerComponent implements OnDestroy {
     }
   }
 
-  private prepareRequest(
-    recurrenceRule: string,
-    startTime: Date,
-    endTime: Date,
-    args: ActionEventArgs
-  ) {
+  private prepareRequest(recurrenceRule: string, startTime: Date, endTime: Date, args: ActionEventArgs) {
     let dateArray = [];
 
     if (!this.scheduler.isSlotAvailable(startTime, endTime)) {
@@ -155,12 +146,7 @@ export class PitchSchedulerComponent implements OnDestroy {
 
     if (!isNullOrUndefined(recurrenceRule)) {
       dateArray = [];
-      let dates: number[] = this.recurrenceEditor.getRecurrenceDates(
-        startTime,
-        recurrenceRule,
-        null,
-        30
-      );
+      let dates: number[] = this.recurrenceEditor.getRecurrenceDates(startTime, recurrenceRule, null, 30);
 
       for (let i: number = 0; i < dates.length; i++) {
         dateArray.push(new Date(dates[i]).toString());

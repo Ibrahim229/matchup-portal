@@ -16,5 +16,40 @@
     (actionFailure)="onActionFailure($event)"
     (renderCell)="onRenderCell($event)"
     (eventRendered)="onEventRendered($event)"
-  ></ejs-schedule>
+  >
+    <e-views>
+      <e-view option="Day">
+        <ng-template #eventTemplate let-data>
+          <div class="template-wrap" [style.background]="data.categoryColor">
+            <div>
+              <div class="subject" [style.background]="data.categoryColor">{{ data.eventName }}</div>
+              <div class="time" [style.background]="data.categoryColor">
+                Time: {{ data.startTime | date : "hh:mm a" }}
+                -
+                {{ data.endTime | date : "hh:mm a" }}
+              </div>
+            </div>
+            <div>
+              <div class="description" *ngIf="data.fromMobile">Name : {{ data.fullName }}</div>
+              <div class="description" *ngIf="data.fromMobile">Phone Number : {{ data.phoneNumber }}</div>
+            </div>
+          </div>
+        </ng-template>
+      </e-view>
+
+      <e-view option="Week">
+        <ng-template #eventTemplate let-data>
+          <!-- Reuse the same template for Month view -->
+          <ng-container *ngTemplateOutlet="eventTemplate; context: { $implicit: data }"></ng-container>
+        </ng-template>
+      </e-view>
+
+      <e-view option="Month">
+        <ng-template #eventTemplate let-data>
+          <!-- Reuse the same template for Month view -->
+          <ng-container *ngTemplateOutlet="eventTemplate; context: { $implicit: data }"></ng-container>
+        </ng-template>
+      </e-view>
+    </e-views>
+  </ejs-schedule>
 </div>

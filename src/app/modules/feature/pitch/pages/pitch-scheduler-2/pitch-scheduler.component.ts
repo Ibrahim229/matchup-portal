@@ -130,6 +130,13 @@ export class PitchSchedulerComponent implements OnDestroy {
     this.toasterService.showToastr(message, ToastrTypes.error);
   }
 
+  private disableActionIfEventFromMobile(args: ActionEventArgs) {
+    if (args.deletedRecords?.[0]?.['fromMobile'] === true || args.changedRecords?.[0]?.['fromMobile'] === true) {
+      args.cancel = true;
+      this.failure('You can not delete events created from mobile.');
+    }
+  }
+
   public onRenderCell(args: RenderCellEventArgs): void {
     if (args.date < new Date()) {
       args.element.classList.add('e-disable-dates');
@@ -172,6 +179,8 @@ export class PitchSchedulerComponent implements OnDestroy {
     }
 
     if (requestType === BeginRequestType.Change) {
+      this.disableActionIfEventFromMobile(args);
+
       const recurrenceRule = args.changedRecords[0]?.['recurrenceRule'];
       const startTime: Date = args.changedRecords[0]['startTime'];
       const endTime: Date = args.changedRecords[0]['endTime'];
@@ -180,6 +189,8 @@ export class PitchSchedulerComponent implements OnDestroy {
     }
 
     if (requestType === BeginRequestType.Remove) {
+      this.disableActionIfEventFromMobile(args);
+
       this.dataQuery.params = [
         { key: 'pitchId', value: this.pitchId },
         { key: 'requestType', value: BeginRequestType.Remove },

@@ -22,11 +22,9 @@
         <ng-template #eventTemplate let-data>
           <div class="template-wrap" [style.background]="data.categoryColor">
             <div>
-              <div class="subject" [style.background]="data.categoryColor">{{ data.eventName }}</div>
+              <div class="subject" [style.background]="data.categoryColor">{{ data.title }}</div>
               <div class="time" [style.background]="data.categoryColor">
-                Time: {{ data.startTime | date : "hh:mm a" }}
-                -
-                {{ data.endTime | date : "hh:mm a" }}
+                {{ data.startTime | date : "hh:mm a" }} - {{ data.endTime | date : "hh:mm a" }}
               </div>
             </div>
             <div>
